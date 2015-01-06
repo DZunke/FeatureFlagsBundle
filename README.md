@@ -62,6 +62,51 @@ class DefaultController extends Controller
 }
 
 ```
+
+### Creating a Condition
+
+At first the Condition must be created. The Condition must implement the
+ConditionInterface. There is a general context available.
+
+``` php
+<?php
+# src/AcmeBundle/FeatureFlags/Condition/Foo.php
+namespace AcmeBundle\FeatureFlags\Condition;
+
+use DZunke\FeatureFlagsBundle\Toggle\Conditions\AbstractCondition;
+use DZunke\FeatureFlagsBundle\Toggle\Conditions\ConditionInterface;
+
+class Foo extends AbstractCondition implements ConditionInterface
+{
+    public function validate()
+    {
+        // [..] Implement your Methods to Validate the Feature
+
+        return true;
+    }
+
+    public function __toString()
+    {
+        return 'Foo';
+    }
+}
+```
+
+After the Class was created it must be defined as a Tagged-Service. With this
+Tag and the Alias the Condition would be loaded. At this point there is many
+space to extend the Condition by adding calls or arguments.
+
+``` yaml
+# src/AcmeBundle/Resources/config/services.yml
+services:
+    acme.feature_flags.condition.fo:
+        class: DZunke\FeatureFlagsBundle\Toggle\Conditions\Foo
+        calls:
+            - [setContext, [@dz.feature_flags.context]]
+        tags:
+            -  { name: dz.feature_flags.toggle.condition, alias: foo }
+```
+
 ## Configuration
 
 ### Example
