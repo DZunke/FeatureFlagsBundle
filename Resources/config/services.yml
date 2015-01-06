@@ -1,0 +1,30 @@
+imports:
+    - { resource: eventListener.yml }
+
+services:
+    dz.feature_flags.context:
+        class: DZunke\FeatureFlagsBundle\Context
+
+    dz.feature_flags.toggle:
+        class: DZunke\FeatureFlagsBundle\Toggle
+
+    dz.feature_flags.toggle.condition.ipaddress:
+        class: DZunke\FeatureFlagsBundle\Toggle\Conditions\IpAddress
+        calls:
+            - [setContext, [@dz.feature_flags.context]]
+        tags:
+            -  { name: dz.feature_flags.toggle.condition, alias: ip_address }
+
+    dz.feature_flags.toggle.condition.hostname:
+        class: DZunke\FeatureFlagsBundle\Toggle\Conditions\Hostname
+        calls:
+            - [setContext, [@dz.feature_flags.context]]
+        tags:
+            -  { name: dz.feature_flags.toggle.condition, alias: hostname }
+
+    dz.feature_flags.toggle.condition.percentage:
+        class: DZunke\FeatureFlagsBundle\Toggle\Conditions\Percentage
+        calls:
+            - [setContext, [@dz.feature_flags.context]]
+        tags:
+            -  { name: dz.feature_flags.toggle.condition, alias: percentage }

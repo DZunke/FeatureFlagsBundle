@@ -1,0 +1,26 @@
+{
+    "name": "dzunke/feature-flags-bundle",
+    "description": "Symfony2 Bundle to implement Feature Flags to your Application",
+    "keywords": ["symfony", "bundle", "feature flags"],
+    "homepage": "https://github.com/DZunke/FeatureFlagsBundle",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Denis Zunke",
+            "email": "denis.zunke@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "psr-0": { "DZunke\\FeatureFlagsBundle": "" }
+    },
+    "target-dir": "DZunke/FeatureFlagsBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "dev-dev"
+        }
+    }
+}
