@@ -22,7 +22,7 @@ class IpAddress extends AbstractCondition implements ConditionInterface
      */
     public function __toString()
     {
-        return 'IpAddress';
+        return 'ip_address';
     }
 
 }

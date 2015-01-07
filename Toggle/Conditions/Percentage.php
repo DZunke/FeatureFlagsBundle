@@ -77,7 +77,7 @@ class Percentage extends AbstractCondition implements ConditionInterface
      */
     public function __toString()
     {
-        return 'Percentage';
+        return 'percentage';
     }
 
 }

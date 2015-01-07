@@ -22,7 +22,7 @@ class Hostname extends AbstractCondition implements ConditionInterface
      */
     public function __toString()
     {
-        return 'Hostname';
+        return 'hostname';
     }
 
 }
