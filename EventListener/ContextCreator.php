@@ -3,7 +3,6 @@
 namespace DZunke\FeatureFlagsBundle\EventListener;
 
 use DZunke\FeatureFlagsBundle\Context;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 class ContextCreator
