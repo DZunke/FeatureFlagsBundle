@@ -1,6 +1,6 @@
 services:
     dz.feature_flags.context.create:
         class: DZunke\FeatureFlagsBundle\EventListener\ContextCreator
-        arguments: [@service_container]
+        arguments: [@dz.feature_flags.context]
         tags:
             - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }

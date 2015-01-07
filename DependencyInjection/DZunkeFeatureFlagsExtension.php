@@ -2,7 +2,6 @@
 
 namespace DZunke\FeatureFlagsBundle\DependencyInjection;
 
-use DZunke\FeatureFlagsBundle\Toggle\Flag;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;

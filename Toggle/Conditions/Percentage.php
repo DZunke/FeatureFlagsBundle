@@ -2,6 +2,9 @@
 
 namespace DZunke\FeatureFlagsBundle\Toggle\Conditions;
 
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
+
 class Percentage extends AbstractCondition implements ConditionInterface
 {
 
@@ -12,12 +15,25 @@ class Percentage extends AbstractCondition implements ConditionInterface
     const BASIC_LIFETIME = 86400;
 
     /**
+     * @var Request
+     */
+    private $request;
+
+    /**
+     * @param RequestStack $request
+     */
+    public function __construct(RequestStack $request)
+    {
+        $this->request = $request->getMasterRequest();
+    }
+
+    /**
      * @return bool
      */
     public function validate()
     {
-        if (isset($_COOKIE[$this->config['cookie']])) {
-            return (bool)$_COOKIE[$this->config['cookie']];
+        if ($this->request->cookies->has($this->config['cookie'])) {
+            return (bool)$this->request->cookies->get($this->config['cookie']);
         }
 
         $value = (int)($this->generateRandomNumber() < $this->config['percentage']);

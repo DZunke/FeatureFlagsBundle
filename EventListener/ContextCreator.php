@@ -2,22 +2,23 @@
 
 namespace DZunke\FeatureFlagsBundle\EventListener;
 
+use DZunke\FeatureFlagsBundle\Context;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 class ContextCreator
 {
     /**
-     * @var ContainerInterface
+     * @var Context
      */
-    private $container;
+    private $context;
 
     /**
-     * @param ContainerInterface $container
+     * @param Context $context
      */
-    public function __construct(ContainerInterface $container)
+    public function __construct(Context $context)
     {
-        $this->container = $container;
+        $this->context = $context;
     }
 
     /**
@@ -25,10 +26,8 @@ class ContextCreator
      */
     public function onKernelRequest(GetResponseEvent $event)
     {
-        $context = $this->container->get('dz.feature_flags.context');
-
-        $context->set('client_ip', $event->getRequest()->getClientIp());
-        $context->set('hostname', $event->getRequest()->getHost());
+        $this->context->set('client_ip', $event->getRequest()->getClientIp());
+        $this->context->set('hostname', $event->getRequest()->getHost());
     }
 
 }

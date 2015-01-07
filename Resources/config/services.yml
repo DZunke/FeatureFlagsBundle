@@ -24,6 +24,7 @@ services:
 
     dz.feature_flags.toggle.condition.percentage:
         class: DZunke\FeatureFlagsBundle\Toggle\Conditions\Percentage
+        arguments: [@request_stack]
         calls:
             - [setContext, [@dz.feature_flags.context]]
         tags:
