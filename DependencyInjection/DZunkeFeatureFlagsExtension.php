@@ -33,33 +33,45 @@ class DZunkeFeatureFlagsExtension extends Extension
         $definition = $container->getDefinition('dz.feature_flags.toggle');
         $definition->addMethodCall('setDefaultState', [$config['default']]);
 
-        if (empty($config['flags'])) {
-            return;
-        }
-
-        $taggedConditions = $container->findTaggedServiceIds('dz.feature_flags.toggle.condition');
+        $this->fillConditionsBag($container);
 
         foreach ($config['flags'] as $name => $flagConfig) {
+            $flagDefinition = new Definition(
+                'DZunke\FeatureFlagsBundle\Toggle\Flag',
+                [
+                    $name,
+                    new Reference('dz.feature_flags.conditions_bag'),
+                    $flagConfig['default']
+                ]
+            );
 
-            $flagDefinition = new Definition('DZunke\FeatureFlagsBundle\Toggle\Flag', [$name, $flagConfig['default']]);
-
-            if (!empty($flagConfig['conditions_config'])) {
-
-                foreach ($taggedConditions as $tagService => $tagConfig) {
-                    $tagConfig = reset($tagConfig);
-                    if (in_array($tagConfig['alias'], array_keys($flagConfig['conditions_config']))) {
-                        $flagDefinition->addMethodCall(
-                            'addCondition',
-                            [new Reference($tagService), $flagConfig['conditions_config'][$tagConfig['alias']]]
-                        );
-                    }
-                }
+            foreach ($flagConfig['conditions_config'] as $condition => $config) {
+                $flagDefinition->addMethodCall(
+                    'addCondition',
+                    [
+                        $condition,
+                        $config
+                    ]
+                );
             }
 
             $container->setDefinition('dz.feature_flags.toggle.flag.' . $name, $flagDefinition);
-
             $definition->addMethodCall('addFlag', [$flagDefinition]);
+        }
+    }
 
+    protected function fillConditionsBag(ContainerBuilder $container)
+    {
+        $taggedConditions = $container->findTaggedServiceIds('dz.feature_flags.toggle.condition');
+        if (!empty($taggedConditions)) {
+            $containerBag = $container->getDefinition('dz.feature_flags.conditions_bag');
+
+            foreach ($taggedConditions as $service => $options) {
+
+                $options = reset($options);
+                $containerBag->addMethodCall('set', [$options['alias'], new Reference($service)]);
+
+            }
         }
     }
 

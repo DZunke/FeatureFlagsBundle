@@ -6,13 +6,14 @@ class IpAddress extends AbstractCondition implements ConditionInterface
 {
 
     /**
+     * @param mixed $config
      * @return bool
      */
-    public function validate()
+    public function validate($config)
     {
         return in_array(
             $this->context->get('client_ip'),
-            $this->config
+            $config
         );
     }
 

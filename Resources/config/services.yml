@@ -8,6 +8,9 @@ services:
     dz.feature_flags.toggle:
         class: DZunke\FeatureFlagsBundle\Toggle
 
+    dz.feature_flags.conditions_bag:
+        class: DZunke\FeatureFlagsBundle\Toggle\ConditionBag
+
     dz.feature_flags.toggle.condition.ipaddress:
         class: DZunke\FeatureFlagsBundle\Toggle\Conditions\IpAddress
         calls:

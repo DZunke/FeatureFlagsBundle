@@ -17,23 +17,25 @@ class Flag
     private $active;
 
     /**
-     * @var ConditionInterface[]
+     * @var ConditionBag
      */
-    private $conditions = [];
+    private $conditions;
 
     /**
      * @var array
      */
-    private $conditionsConfig = [];
+    private $config = [];
 
     /**
-     * @param string $name
-     * @param bool   $defaultState
+     * @param              $name
+     * @param ConditionBag $conditions
+     * @param bool         $defaultState
      */
-    public function __construct($name, $defaultState)
+    public function __construct($name, ConditionBag $conditions, $defaultState = true)
     {
-        $this->name   = $name;
-        $this->active = (bool)$defaultState;
+        $this->name       = $name;
+        $this->conditions = $conditions;
+        $this->active     = (bool)$defaultState;
     }
 
     /**
@@ -45,37 +47,29 @@ class Flag
     }
 
     /**
-     * @param ConditionInterface $condition
-     * @param  mixed             $config
+     * @param $name
+     * @param $config
      * @return $this
      */
-    public function addCondition(ConditionInterface $condition, $config)
+    public function addCondition($name, $config)
     {
-        $this->conditions[(string)$condition]       = $condition;
-        $this->conditionsConfig[(string)$condition] = $config;
+        if (!$this->conditions->has($name)) {
+            throw new \InvalidArgumentException(
+                sprintf('condition with name "%s" does not exists', $name)
+            );
+        }
+
+        $this->config[$name] = $config;
 
         return $this;
     }
 
     /**
-     * @param string $name
-     * @return ConditionInterface|null
+     * @return array
      */
-    public function getCondition($name)
+    public function getConfig()
     {
-        if (isset($this->conditions[$name])) {
-            return $this->conditions[$name];
-        }
-
-        return null;
-    }
-
-    /**
-     * @return Conditions\ConditionInterface[]
-     */
-    public function getConditions()
-    {
-        return $this->conditions;
+        return $this->config;
     }
 
     /**
@@ -85,17 +79,17 @@ class Flag
     {
         $actual = $this->active;
 
-        if (empty($this->conditions)) {
+        if (empty($this->config)) {
             return $actual;
         }
 
-        foreach ($this->conditions as $condition) {
+        foreach ($this->config as $condition => $config) {
 
-            if (isset($this->conditionsConfig[(string)$condition])) {
-                $condition->setConfig($this->conditionsConfig[(string)$condition]);
+            if (!$this->conditions->has($condition)) {
+                continue;
             }
 
-            $validate = $condition->validate();
+            $validate = $this->conditions->get($condition)->validate($config);
 
             if ($actual === true && $validate === false) {
                 return false;

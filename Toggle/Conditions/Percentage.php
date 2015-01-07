@@ -28,41 +28,39 @@ class Percentage extends AbstractCondition implements ConditionInterface
     }
 
     /**
+     * @param mixed $config
      * @return bool
      */
-    public function validate()
+    public function validate($config)
     {
-        if ($this->request->cookies->has($this->config['cookie'])) {
-            return (bool)$this->request->cookies->get($this->config['cookie']);
+        $config = $this->formatConfig($config);
+
+        if ($this->request->cookies->has($config['cookie'])) {
+            return (bool)$this->request->cookies->get($config['cookie']);
         }
 
-        $value = (int)($this->generateRandomNumber() < $this->config['percentage']);
+        $value = (int)($this->generateRandomNumber() < $config['percentage']);
         setcookie(
-            $this->config['cookie'],
+            $config['cookie'],
             $value,
-            time() + $this->config['lifetime']
+            time() + $config['lifetime']
         );
 
         return (bool)$value;
     }
 
-    /**
-     * {@inheritdoc }
-     */
-    public function setConfig($config)
+    private function formatConfig($config)
     {
-        parent::setConfig($config);
-
-        if (!isset($this->config['percentage'])) {
+        if (!isset($config['percentage'])) {
             throw new \Exception('there must be a percentage set to use the condition');
         }
 
-        if (!isset($this->config['cookie'])) {
-            $this->config['cookie'] = self::BASIC_COOKIE_NAME;
+        if (!isset($config['cookie'])) {
+            $config['cookie'] = self::BASIC_COOKIE_NAME;
         }
 
-        if (!isset($this->config['lifetime'])) {
-            $this->config['lifetime'] = self::BASIC_LIFETIME;
+        if (!isset($config['lifetime'])) {
+            $config['lifetime'] = self::BASIC_LIFETIME;
         }
     }
 
