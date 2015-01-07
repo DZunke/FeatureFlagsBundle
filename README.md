@@ -63,6 +63,15 @@ class DefaultController extends Controller
 
 ```
 
+### Twig
+
+``` php
+# src/AcmeBundle/Resources/views/Index/index.html.twig
+{% if has_feature('FooFeature') %}
+    <p>Lorem Ipsum Dolor ...</p>
+{% endif %}
+```
+
 ### Creating a Condition
 
 At first the Condition must be created. The Condition must implement the
