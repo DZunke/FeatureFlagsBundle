@@ -72,6 +72,20 @@ class DefaultController extends Controller
 {% endif %}
 ```
 
+### Argument-Usage
+
+On every check you can give arguments to the check if you want to specify
+the check. The Arguments for a Flag can be definied by an array on the validation
+method. The Keys must be named like the condition itself. Please Note that if the
+Condition does not support the Arguments they would be ignored.
+
+``` php
+# src/AcmeBundle/Resources/views/Index/index.html.twig
+{% if has_feature('FooBarFeature', {'device': 'tablet'}) %}
+    <p>Lorem Ipsum Dolor ...</p>
+{% endif %}
+```
+
 ### Creating a Condition
 
 At first the Condition must be created. The Condition must implement the
@@ -87,7 +101,7 @@ use DZunke\FeatureFlagsBundle\Toggle\Conditions\ConditionInterface;
 
 class Foo extends AbstractCondition implements ConditionInterface
 {
-    public function validate()
+    public function validate($config, $argument = null)
     {
         // [..] Implement your Methods to Validate the Feature
 
@@ -134,6 +148,12 @@ d_zunke_feature_flags:
                     percentage: 50
                     cookie: ExampleCookieForFeature
                     lifetime: 3600
+        FooBarFeature:
+            conditions_config:
+                device:
+                  device:
+                    tablet: "/iphone|ipod|bb10|meego|blackberry|windows\\sce|palm|windows phone|(^.*android(?:(?!mobile).)*$)/i"
+                    mobile: "/iphone|ipod|bb10|meego|blackberry|windows\\sce|palm|windows phone|((android.*mobile))|mobile/i"
 ```
 
 ## Available Conditions
@@ -151,6 +171,11 @@ percentage:
   cookie: NameThisCookieForTheUser # Default: 84a0b3f187a1d3bfefbb51d4b93074b1e5d9102a
   percentage: 29 # Default: 100
   lifetime: 3600 # Default: 86400 - 1 day
+```
+
+``` yaml
+device:
+  name: regex # give regex for each valid device
 ```
 
 ### Reference

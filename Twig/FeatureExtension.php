@@ -29,11 +29,12 @@ class FeatureExtension extends \Twig_Extension
 
     /**
      * @param string $name
+     * @param array  $arguments
      * @return bool
      */
-    public function checkFeature($name)
+    public function checkFeature($name, $arguments = null)
     {
-        return $this->toggle->isActive($name);
+        return $this->toggle->isActive($name, $arguments);
     }
 
     public function getName()

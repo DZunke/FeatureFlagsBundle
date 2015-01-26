@@ -2,8 +2,6 @@
 
 namespace DZunke\FeatureFlagsBundle\Toggle;
 
-use DZunke\FeatureFlagsBundle\Toggle\Conditions\ConditionInterface;
-
 class Flag
 {
     /**
@@ -73,9 +71,10 @@ class Flag
     }
 
     /**
+     * @param array $arguments
      * @return bool
      */
-    public function isActive()
+    public function isActive($arguments = null)
     {
         $actual = $this->active;
 
@@ -89,7 +88,8 @@ class Flag
                 continue;
             }
 
-            $validate = $this->conditions->get($condition)->validate($config);
+            $argument = !is_null($arguments) && array_key_exists($condition, $arguments) ? $arguments[$condition] : null;
+            $validate = $this->conditions->get($condition)->validate($config, $argument);
 
             if ($actual === true && $validate === false) {
                 return false;

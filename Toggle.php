@@ -61,16 +61,17 @@ class Toggle
     }
 
     /**
-     * @param $flag
+     * @param string $flag
+     * @param array  $arguments
      * @return bool
      */
-    public function isActive($flag)
+    public function isActive($flag, $arguments = null)
     {
         if (!isset($this->flags[$flag])) {
             return $this->defaultState;
         }
 
-        return $this->flags[$flag]->isActive();
+        return $this->flags[$flag]->isActive($arguments);
     }
 
 }

@@ -29,9 +29,11 @@ class Percentage extends AbstractCondition implements ConditionInterface
 
     /**
      * @param mixed $config
+     * @param null  $argument
      * @return bool
+     * @throws \Exception
      */
-    public function validate($config)
+    public function validate($config, $argument = null)
     {
         $config = $this->formatConfig($config);
 
@@ -62,6 +64,8 @@ class Percentage extends AbstractCondition implements ConditionInterface
         if (!isset($config['lifetime'])) {
             $config['lifetime'] = self::BASIC_LIFETIME;
         }
+
+        return $config;
     }
 
     /**

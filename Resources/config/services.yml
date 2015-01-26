@@ -33,6 +33,14 @@ services:
         tags:
             -  { name: dz.feature_flags.toggle.condition, alias: percentage }
 
+    dz.feature_flags.toggle.condition.device:
+            class: DZunke\FeatureFlagsBundle\Toggle\Conditions\Device
+            arguments: [@request_stack]
+            calls:
+                - [setContext, [@dz.feature_flags.context]]
+            tags:
+                -  { name: dz.feature_flags.toggle.condition, alias: device }
+
     dz.feature_flags.twig.feature_extension:
         class: DZunke\FeatureFlagsBundle\Twig\FeatureExtension
         arguments: [@dz.feature_flags.toggle]

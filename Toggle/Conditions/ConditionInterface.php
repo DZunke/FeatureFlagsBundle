@@ -10,6 +10,6 @@ interface ConditionInterface
 
     public function setContext(Context $context);
 
-    public function validate($config);
+    public function validate($config, $argument = null);
 
 }
