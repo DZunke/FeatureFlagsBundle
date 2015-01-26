@@ -151,7 +151,6 @@ d_zunke_feature_flags:
         FooBarFeature:
             conditions_config:
                 device:
-                  device:
                     tablet: "/ipad|playbook|android|kindle|opera mobi|arm|(^.*android(?:(?!mobile).)*$)/i"
                     mobile: "/iphone|ipod|bb10|meego|blackberry|windows\\sce|palm|windows phone|((android.*mobile))|mobile/i"
 ```
