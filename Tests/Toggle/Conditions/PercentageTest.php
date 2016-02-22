@@ -48,7 +48,7 @@ class PercentageTest extends PHPUnit_Framework_TestCase
 
         $sut = new Percentage($requestStackMock);
         $this->assertTrue($sut->validate([
-            'percentage' => 666,
+            'percentage' => 798,
         ]));
     }
 
@@ -67,7 +67,7 @@ class PercentageTest extends PHPUnit_Framework_TestCase
         $this->assertInternalType('bool', $sut->validate(['percentage' => 3]));
     }
 
-    public function testToStringMethod()
+    public function testToString()
     {
         $requestStackMock = $this->getMock(RequestStack::class);
 
