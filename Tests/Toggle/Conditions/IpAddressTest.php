@@ -1,4 +1,5 @@
 <?php
+
 namespace DZunke\FeatureFlagsBundle\Tests\Toggle\Condition;
 
 use DZunke\FeatureFlagsBundle\Context;
