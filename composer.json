@@ -13,7 +13,8 @@
     ],
     "require": {
         "php": ">=5.4",
-        "symfony/symfony": "~2.3|~3.0"
+        "symfony/symfony": "~2.3|~3.0",
+        "phpunit/phpunit": "^5.2"
     },
     "autoload": {
         "psr-0": { "DZunke\\FeatureFlagsBundle": "" }
