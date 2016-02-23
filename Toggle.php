@@ -10,7 +10,7 @@ class Toggle
     /**
      * @var bool
      */
-    private $defaultState = true;
+    private $defaultState;
 
     /**
      * @var Flag[]
