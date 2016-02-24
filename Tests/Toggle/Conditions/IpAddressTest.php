@@ -22,7 +22,7 @@ class IpAddressTest extends PHPUnit_Framework_TestCase
     public function testItReturnsTrue()
     {
         $contextMock = $this->getMock(Context::class);
-        $contextMock->method('get')->willReturn('127.0.0.1', '169.168.1.12');
+        $contextMock->method('get')->will($this->onConsecutiveCalls('127.0.0.1', '169.168.1.12'));
 
         $sut = new IpAddress();
         $sut->setContext($contextMock);

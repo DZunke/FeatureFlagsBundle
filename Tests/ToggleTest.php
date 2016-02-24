@@ -39,7 +39,7 @@ class ToggleTest extends PHPUnit_Framework_TestCase
     {
         $flagMock = $this->getMock(Toggle\Flag::class, [], ['MySpecialFeature', new Toggle\ConditionBag(), true]);
         $flagMock->method('__toString')->willReturn('MySpecialFeature');
-        $flagMock->method('isActive')->willReturn(true, false);
+        $flagMock->method('isActive')->will($this->onConsecutiveCalls(true, false));
 
         $sut = new Toggle();
         $sut->addFlag($flagMock);
@@ -47,5 +47,4 @@ class ToggleTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($sut->isActive('MySpecialFeature'));
         $this->assertFalse($sut->isActive('MySpecialFeature'));
     }
-
 }

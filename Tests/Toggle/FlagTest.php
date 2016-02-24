@@ -20,7 +20,7 @@ class FlagTest extends PHPUnit_Framework_TestCase
 
         //For the isActive method
         $conditionMock = $this->getMock(ConditionInterface::class);
-        $conditionMock->method('validate')->willReturn(true, false);
+        $conditionMock->method('validate')->will($this->onConsecutiveCalls(true, false));
 
         $conditionBagMock->method('get')->willReturn($conditionMock);
 
