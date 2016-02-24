@@ -21,7 +21,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
     public function testItReturnsBoolean()
     {
         $contextMock = $this->getMock(Context::class);
-        $contextMock->method('get')->willReturn('myhostname', 'thirdhostname');
+        $contextMock->method('get')->will($this->onConsecutiveCalls('myhostname', 'thirdhostname'));
 
         $sut = new Hostname();
         $sut->setContext($contextMock);

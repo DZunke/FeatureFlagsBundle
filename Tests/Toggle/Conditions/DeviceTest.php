@@ -57,7 +57,7 @@ class DeviceTest extends PHPUnit_Framework_TestCase
     public function testItReturnsBoolWhenCallingValidateWithoutArgument()
     {
         $headerBagMock = $this->getMock(HeaderBag::class);
-        $headerBagMock->method('get')->with('User-Agent')->willReturn('Matched-User-Agent', 'Random-User-Agent');
+        $headerBagMock->method('get')->with('User-Agent')->will($this->onConsecutiveCalls('Matched-User-Agent', 'Random-User-Agent'));
 
         $requestMock = $this->getMock(Request::class);
         $requestMock->headers = $headerBagMock;
