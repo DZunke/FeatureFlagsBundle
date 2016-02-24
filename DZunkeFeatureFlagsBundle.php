@@ -2,6 +2,8 @@
 
 namespace DZunke\FeatureFlagsBundle;
 
+use DZunke\FeatureFlagsBundle\DependencyInjection\Compiler\Conditions;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class DZunkeFeatureFlagsBundle extends Bundle
