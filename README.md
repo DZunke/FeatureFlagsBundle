@@ -1,6 +1,6 @@
 # Symfony FeatureFlagsBundle [![License](https://poser.pugx.org/dzunke/feature-flags-bundle/license.svg)](https://packagist.org/packages/dzunke/feature-flags-bundle)
 
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/600780bb-3719-4a13-836c-375af89dd81d/mini.png)](https://insight.sensiolabs.com/projects/600780bb-3719-4a13-836c-375af89dd81d)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/600780bb-3719-4a13-836c-375af89dd81d/mini.png)](https://insight.sensiolabs.com/projects/600780bb-3719-4a13-836c-375af89dd81d) [![TravisCI](https://api.travis-ci.org/DZunke/FeatureFlagsBundle.svg)
 
 The Bundle will allow you to implement Feature Flags to your Application.
 Please Note that there is no Interface available, so the Flags must be
