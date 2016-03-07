@@ -7,7 +7,7 @@ use DZunke\FeatureFlagsBundle\Twig\FeatureExtension;
 use PHPUnit_Framework_TestCase;
 use Twig_SimpleFunction;
 
-class FeatureExtensionText extends PHPUnit_Framework_TestCase
+class FeatureExtensionTest extends PHPUnit_Framework_TestCase
 {
 
     public function testGetFunctions()
