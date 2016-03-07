@@ -15,9 +15,10 @@ class FeatureExtensionTest extends PHPUnit_Framework_TestCase
         $toggleMock = $this->getMock(Toggle::class);
 
         $sut = new FeatureExtension($toggleMock);
+        $functions = $sut->getFunctions();
 
-        $this->assertSame(1, count($sut->getFunctions()));
-        $this->assertInstanceOf(Twig_SimpleFunction::class, reset($sut->getFunctions()));
+        $this->assertSame(1, count($functions));
+        $this->assertInstanceOf(Twig_SimpleFunction::class, reset($functions));
     }
 
     public function testGetName()
