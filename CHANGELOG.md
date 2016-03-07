@@ -1,5 +1,6 @@
-UPDATES 2016-03-07
+Version 1.1.0
 =====================
 
-  * Fix for loading additional toggles with extensions (@benniezwerver)
-  * Implementing travisCI
+- Fix for loading additional toggles with extensions (@benniezwerver)
+- Implementing TravisCI 
+- Upgrade to Symfony 3.0
