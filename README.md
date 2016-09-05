@@ -6,6 +6,8 @@ The Bundle will allow you to implement Feature Flags to your Application.
 Please Note that there is no Interface available, so the Flags must be
 configured directly in Symfony-Configs.
 
+**Use Versions >= 2.0 if Symfony 3.0 Support is wanted!**
+
 ## Documentation
 
 ## Setup
