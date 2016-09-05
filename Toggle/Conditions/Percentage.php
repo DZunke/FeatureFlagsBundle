@@ -3,7 +3,6 @@
 namespace DZunke\FeatureFlagsBundle\Toggle\Conditions;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 class Percentage extends AbstractCondition implements ConditionInterface
 {
@@ -20,11 +19,11 @@ class Percentage extends AbstractCondition implements ConditionInterface
     private $request;
 
     /**
-     * @param RequestStack $request
+     * @param Request $request
      */
-    public function __construct(RequestStack $request)
+    public function __construct(Request $request)
     {
-        $this->request = $request->getMasterRequest();
+        $this->request = $request;
     }
 
     /**

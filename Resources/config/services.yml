@@ -27,7 +27,7 @@ services:
 
     dz.feature_flags.toggle.condition.percentage:
         class: DZunke\FeatureFlagsBundle\Toggle\Conditions\Percentage
-        arguments: ["@request_stack"]
+        arguments: ["@request"]
         calls:
             - [setContext, ["@dz.feature_flags.context"]]
         tags:
@@ -35,7 +35,7 @@ services:
 
     dz.feature_flags.toggle.condition.device:
             class: DZunke\FeatureFlagsBundle\Toggle\Conditions\Device
-            arguments: ["@request_stack"]
+            arguments: ["@request"]
             calls:
                 - [setContext, ["@dz.feature_flags.context"]]
             tags:
