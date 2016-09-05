@@ -178,9 +178,10 @@ device:
 ```
 
 ``` yaml
+# See php.net/datetime
 date:
-  start_date: "2016-09-01" # (optional) start date, accepts DateTime constructor values (php.net/datetime)
-  end_date: "2016-09-03" # (optional) end date, accepts DateTime constructor values (php.net/datetime)
+  start_date: "2016-09-01" # Start date, accepts DateTime constructor values. Defaults to "now".
+  end_date: "2016-09-03" # End date, accepts DateTime constructor values. Defaults to "now".
 ```
 
 ### Reference

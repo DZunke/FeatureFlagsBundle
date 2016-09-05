@@ -7,7 +7,11 @@ use DateTime;
 class Date extends AbstractCondition implements ConditionInterface
 {
     /**
-     * @var date
+     * Current date, in DateTime format.
+     * 
+     * @see http://php.net/manual/en/class.datetime.php
+     *
+     * @var string
      */
     protected $currentDate = "now";
 
