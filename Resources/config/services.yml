@@ -41,6 +41,13 @@ services:
             tags:
                 -  { name: dz.feature_flags.toggle.condition, alias: device }
 
+    dz.feature_flags.toggle.condition.date:
+            class: DZunke\FeatureFlagsBundle\Toggle\Conditions\Date
+            calls:
+                - [setContext, ["@dz.feature_flags.context"]]
+            tags:
+                -  { name: dz.feature_flags.toggle.condition, alias: date }
+
     dz.feature_flags.twig.feature_extension:
         class: DZunke\FeatureFlagsBundle\Twig\FeatureExtension
         arguments: ["@dz.feature_flags.toggle"]

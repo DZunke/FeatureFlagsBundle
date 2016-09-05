@@ -177,6 +177,13 @@ device:
   name: regex # give regex for each valid device
 ```
 
+``` yaml
+# See php.net/datetime
+date:
+  start_date: "2016-09-01" # Start date, accepts DateTime constructor values. Defaults to "now".
+  end_date: "2016-09-03" # End date, accepts DateTime constructor values. Defaults to "now".
+```
+
 ### Reference
 
 ``` yaml
