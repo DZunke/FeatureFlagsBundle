@@ -1,6 +1,3 @@
-Version 1.1.0
-=====================
-
-- Fix for loading additional toggles with extensions (@benniezwerver)
-- Implementing TravisCI 
-- Upgrade to Symfony 3.0
+Version 2.0.0
+=============
+- Created Version with removed Symfony 2.3 Support
