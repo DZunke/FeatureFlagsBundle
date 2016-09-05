@@ -8,25 +8,24 @@ use DZunke\FeatureFlagsBundle\Toggle\Conditions\Device;
 use PHPUnit_Framework_TestCase;
 use Symfony\Component\HttpFoundation\HeaderBag;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 use PHPUnit_Framework_MockObject_MockObject;
 
 class DeviceTest extends PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var RequestStack|PHPUnit_Framework_MockObject_MockObject
+     * @var Request|PHPUnit_Framework_MockObject_MockObject
      */
-    private $requestStackMock;
+    private $request;
 
     public function setUp()
     {
-        $this->requestStackMock = $this->getMock(RequestStack::class);
+        $this->request = $this->getMock(Request::class);
     }
 
     public function testItExtendsCorrectly()
     {
-        $sut = new Device($this->requestStackMock);
+        $sut = new Device($this->request);
 
         $this->assertInstanceOf(AbstractCondition::class, $sut);
         $this->assertInstanceOf(ConditionInterface::class, $sut);
@@ -34,7 +33,7 @@ class DeviceTest extends PHPUnit_Framework_TestCase
 
     public function testIsReturnsFalseItConfigIsIncorrect()
     {
-        $sut = new Device($this->requestStackMock);
+        $sut = new Device($this->request);
 
         $this->assertFalse($sut->validate(null));
     }
@@ -47,9 +46,7 @@ class DeviceTest extends PHPUnit_Framework_TestCase
         $requestMock = $this->getMock(Request::class);
         $requestMock->headers = $headerBagMock;
 
-        $this->requestStackMock->method('getMasterRequest')->willReturn($requestMock);
-
-        $sut = new Device($this->requestStackMock);
+        $sut = new Device($requestMock);
 
         $this->assertFalse($sut->validate([], null));
     }
@@ -62,9 +59,7 @@ class DeviceTest extends PHPUnit_Framework_TestCase
         $requestMock = $this->getMock(Request::class);
         $requestMock->headers = $headerBagMock;
 
-        $this->requestStackMock->method('getMasterRequest')->willReturn($requestMock);
-
-        $sut = new Device($this->requestStackMock);
+        $sut = new Device($requestMock);
 
         $array = [
             'first-agents' => '/^Custom-Agent-1|Custom-Agent-2|Custom-Agent-3|Custom-Agent-4$/',
@@ -83,9 +78,7 @@ class DeviceTest extends PHPUnit_Framework_TestCase
         $requestMock = $this->getMock(Request::class);
         $requestMock->headers = $headerBagMock;
 
-        $this->requestStackMock->method('getMasterRequest')->willReturn($requestMock);
-
-        $sut = new Device($this->requestStackMock);
+        $sut = new Device($requestMock);
 
         $array = [
             'first-agents' => '/^Custom-Agent-1|Custom-Agent-2|Custom-Agent-3|Custom-Agent-4$/',
@@ -98,7 +91,7 @@ class DeviceTest extends PHPUnit_Framework_TestCase
 
     public function testToString()
     {
-        $sut = new Device($this->requestStackMock);
+        $sut = new Device($this->request);
 
         $this->assertSame('device', (string) $sut);
     }

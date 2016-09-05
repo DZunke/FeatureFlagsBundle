@@ -9,16 +9,15 @@ use Exception;
 use PHPUnit_Framework_TestCase;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 class PercentageTest extends PHPUnit_Framework_TestCase
 {
 
     public function testItExtendsCorrectly()
     {
-        $requestStackMock = $this->getMock(RequestStack::class);
+        $request = $this->getMock(Request::class);
 
-        $sut = new Percentage($requestStackMock);
+        $sut = new Percentage($request);
 
         $this->assertInstanceOf(AbstractCondition::class, $sut);
         $this->assertInstanceOf(ConditionInterface::class, $sut);
@@ -28,9 +27,9 @@ class PercentageTest extends PHPUnit_Framework_TestCase
     {
         $this->setExpectedException(Exception::class);
 
-        $requestStackMock = $this->getMock(RequestStack::class);
+        $request = $this->getMock(Request::class);
 
-        $sut = new Percentage($requestStackMock);
+        $sut = new Percentage($request);
         $sut->validate([], 'nothing');
     }
 
@@ -43,10 +42,7 @@ class PercentageTest extends PHPUnit_Framework_TestCase
         $requestMock = $this->getMock(Request::class);
         $requestMock->cookies = $parameterBagMock;
 
-        $requestStackMock = $this->getMock(RequestStack::class);
-        $requestStackMock->method('getMasterRequest')->willReturn($requestMock);
-
-        $sut = new Percentage($requestStackMock);
+        $sut = new Percentage($requestMock);
         $this->assertTrue($sut->validate([
             'percentage' => 798,
         ]));
@@ -60,18 +56,13 @@ class PercentageTest extends PHPUnit_Framework_TestCase
         $requestMock = $this->getMock(Request::class);
         $requestMock->cookies = $parameterBagMock;
 
-        $requestStackMock = $this->getMock(RequestStack::class);
-        $requestStackMock->method('getMasterRequest')->willReturn($requestMock);
-
-        $sut = new Percentage($requestStackMock);
+        $sut = new Percentage($requestMock);
         $this->assertInternalType('bool', $sut->validate(['percentage' => 3]));
     }
 
     public function testToString()
     {
-        $requestStackMock = $this->getMock(RequestStack::class);
-
-        $sut = new Percentage($requestStackMock);
+        $sut = new Percentage($this->getMock(Request::class));
 
         $this->assertSame('percentage', (string) $sut);
     }
