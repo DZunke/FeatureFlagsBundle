@@ -1,6 +1,7 @@
 Version 1.2.0
 =============
 - Re-Enable Symfony 2.3 - use v2.0 for Symfony 3.0 compatible version
+- Implement new Toggle "Date" (@antoligy)
 
 Version 1.1.0
 =============
