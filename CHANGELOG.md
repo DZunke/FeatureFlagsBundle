@@ -1,3 +1,7 @@
+Version 2.2.1
+=============
+- Fix Configuration, cause conditions_config is not required
+
 Version 2.2.0
 =============
 - Fix to TravisCI-Configuration to support current php versions and symfony versions
