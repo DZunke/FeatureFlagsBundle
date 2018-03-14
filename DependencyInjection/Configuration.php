@@ -36,7 +36,8 @@ class Configuration implements ConfigurationInterface
 
         /** @var $connectionNode ArrayNodeDefinition */
         $mainNode = $node->useAttributeAsKey('feature')
-            ->cannotBeEmpty()
+            ->isRequired()
+            ->requiresAtLeastOneElement()
             ->info('feature flags for the built system')
             ->prototype('array');
 
@@ -46,8 +47,9 @@ class Configuration implements ConfigurationInterface
                 ->defaultFalse()
             ->end()
             ->arrayNode('conditions_config')
+                ->isRequired()
+                ->requiresAtLeastOneElement()
                 ->info('list of configured conditions which must be true to set this flag active')
-                ->cannotBeEmpty()
                 ->prototype('variable')
             ->end()
         ->end();
