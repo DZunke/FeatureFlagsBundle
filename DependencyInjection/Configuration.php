@@ -47,7 +47,6 @@ class Configuration implements ConfigurationInterface
                 ->defaultFalse()
             ->end()
             ->arrayNode('conditions_config')
-                ->isRequired()
                 ->requiresAtLeastOneElement()
                 ->info('list of configured conditions which must be true to set this flag active')
                 ->prototype('variable')
