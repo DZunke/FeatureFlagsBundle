@@ -1,3 +1,7 @@
+Version 2.x
+=============
+- Remove deprecation of public / private service (@elonmir)
+
 Version 2.2.1
 =============
 - Fix Configuration, cause conditions_config is not required
