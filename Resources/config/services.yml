@@ -6,6 +6,7 @@ services:
         class: DZunke\FeatureFlagsBundle\Context
 
     dz.feature_flags.toggle:
+        public: true
         class: DZunke\FeatureFlagsBundle\Toggle
 
     dz.feature_flags.conditions_bag:
