@@ -1,21 +1,8 @@
-Version 2.3.0
-=============
-- Remove deprecation of public / private service (@elonmir)
+Version 3.0
+===========
+- Support for Symfony 4.0
+- Remove Support for PHP < 7.0
+- Remove Support vor Symfony 2.x
+- Shorter Alias "feature" for Service "dz.feature_flags.toggle"
+    - Readbaility: `$this->get('feature')->isActive('foo');`
 
-Version 2.2.1
-=============
-- Fix Configuration, cause conditions_config is not required
-
-Version 2.2.0
-=============
-- Fix to TravisCI-Configuration to support current php versions and symfony versions
-- Remove deprecated cannotBeEmpty from Configuration (@gzumba)
--  Requirement changed from symfony/symfony to symfony/framework-bundle (@mohrekopp)
-
-Version 2.1.0
-=============
-- Implement new Toggle "Date" (@antoligy)
-
-Version 2.0.0
-=============
-- Created Version with removed Symfony 2.3 Support

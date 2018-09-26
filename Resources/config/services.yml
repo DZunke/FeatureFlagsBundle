@@ -5,6 +5,10 @@ services:
     dz.feature_flags.context:
         class: DZunke\FeatureFlagsBundle\Context
 
+    feature:
+        alias: dz.feature_flags.toggle
+        public: true
+
     dz.feature_flags.toggle:
         public: true
         class: DZunke\FeatureFlagsBundle\Toggle
