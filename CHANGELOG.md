@@ -1,4 +1,4 @@
-Version 2.x
+Version 2.3.0
 =============
 - Remove deprecation of public / private service (@elonmir)
 
