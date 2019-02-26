@@ -2,13 +2,26 @@
 
 namespace DZunke\FeatureFlagsBundle\Command;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use DZunke\FeatureFlagsBundle\Toggle;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class DebugFlagsCommand extends ContainerAwareCommand
+class DebugFlagsCommand extends Command
 {
+    /** @var Toggle */
+    private $toggle;
+
+    /** @var Toggle\ConditionBag */
+    private $conditionBag;
+
+    public function __construct(Toggle $toggle, Toggle\ConditionBag $conditionBag)
+    {
+        parent::__construct();
+        $this->toggle = $toggle;
+        $this->conditionBag = $conditionBag;
+    }
 
     protected function configure()
     {
@@ -29,11 +42,10 @@ class DebugFlagsCommand extends ContainerAwareCommand
         $output->writeln('<fg=cyan>------------------------</fg=cyan>');
         $output->writeln('');
 
-        $conditions = $this->getContainer()->get('dz.feature_flags.conditions_bag');
         $table = new Table($output);
         $table->setStyle('borderless');
         $table->setHeaders(['name', 'class']);
-        foreach ($conditions as $name => $condition) {
+        foreach ($this->conditionBag as $name => $condition) {
             $table->addRow([$name, get_class($condition)]);
         }
         $table->render();
@@ -51,7 +63,7 @@ class DebugFlagsCommand extends ContainerAwareCommand
 
     private function renderFlagsTable(OutputInterface $output)
     {
-        $flags = $this->getContainer()->get('dz.feature_flags.toggle')->getFlags();
+        $flags = $this->toggle->getFlags();
         if (empty($flags)) {
             $output->writeln('<comment> ! [NOTE] there are no flags configured</comment>');
             return;

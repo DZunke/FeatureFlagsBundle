@@ -58,3 +58,11 @@ services:
         arguments: ["@dz.feature_flags.toggle"]
         tags:
             - { name: twig.extension }
+
+    dz.feature_flags.debug.command:
+        class: DZunke\FeatureFlagsBundle\Command\DebugFlagsCommand
+        arguments:
+            - '@dz.feature_flags.toggle'
+            - '@dz.feature_flags.conditions_bag'
+        tags:
+            - { name: console.command }
