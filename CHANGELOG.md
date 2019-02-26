@@ -1,3 +1,7 @@
+Version 3.x
+===========
+- Remove Deprecated ContainerAwareCommand (by @kejwmen)
+
 Version 3.0
 ===========
 - Support for Symfony 4.0
