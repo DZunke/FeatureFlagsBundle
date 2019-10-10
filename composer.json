@@ -4,7 +4,7 @@
     "keywords": ["symfony", "bundle", "feature flags"],
     "homepage": "https://github.com/DZunke/FeatureFlagsBundle",
     "license": "MIT",
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "authors": [
         {
             "name": "Denis Zunke",
@@ -13,7 +13,12 @@
     ],
     "require": {
         "php": ">=7.0",
-        "symfony/framework-bundle": "~3.0|~4.0"
+        "symfony/http-foundation": "~3.0|~4.0",
+        "symfony/http-kernel": "~3.0|~4.0",
+        "symfony/dependency-injection": "~3.0|~4.0",
+        "symfony/config": "~3.0|~4.0",
+        "symfony/console": "~3.0|~4.0",
+        "symfony/twig-bridge": "~3.0|~4.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~5",
