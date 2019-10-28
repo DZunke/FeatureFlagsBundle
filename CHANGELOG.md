@@ -1,4 +1,4 @@
-Version 3.x
+Version 3.1
 ===========
 - Remove Deprecated ContainerAwareCommand (by @kejwmen)
 - Update travis matrix for current symfony versions
