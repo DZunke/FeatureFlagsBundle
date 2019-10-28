@@ -3,6 +3,7 @@
 namespace DZunke\FeatureFlagsBundle\Toggle\Conditions;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class Device extends AbstractCondition implements ConditionInterface
 {
@@ -13,11 +14,11 @@ class Device extends AbstractCondition implements ConditionInterface
     private $request;
 
     /**
-     * @param Request $request
+     * @param RequestStack $request
      */
-    public function __construct(Request $request)
+    public function __construct(RequestStack $request)
     {
-        $this->request = $request;
+        $this->request = $request->getMasterRequest();
     }
 
     /**

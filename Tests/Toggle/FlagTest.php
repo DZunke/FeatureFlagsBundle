@@ -5,21 +5,21 @@ namespace DZunke\FeatureFlagsBundle\Tests\Toggle;
 use DZunke\FeatureFlagsBundle\Toggle\ConditionBag;
 use DZunke\FeatureFlagsBundle\Toggle\Conditions\ConditionInterface;
 use DZunke\FeatureFlagsBundle\Toggle\Flag;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use InvalidArgumentException;
 
-class FlagTest extends PHPUnit_Framework_TestCase
+class FlagTest extends TestCase
 {
 
     public function testIsActiveReturnsBool()
     {
-        $conditionBagMock = $this->getMock(ConditionBag::class);
+        $conditionBagMock = $this->createMock(ConditionBag::class);
 
         //For the addComponent method
         $conditionBagMock->method('has')->willReturn(true);
 
         //For the isActive method
-        $conditionMock = $this->getMock(ConditionInterface::class);
+        $conditionMock = $this->createMock(ConditionInterface::class);
         $conditionMock->method('validate')->will($this->onConsecutiveCalls(true, false));
 
         $conditionBagMock->method('get')->willReturn($conditionMock);
@@ -33,7 +33,7 @@ class FlagTest extends PHPUnit_Framework_TestCase
 
     public function testIsActiveReturnsDefaultIfEmptyArray()
     {
-        $conditionBagMock = $this->getMock(ConditionBag::class);
+        $conditionBagMock = $this->createMock(ConditionBag::class);
 
         $sut = new Flag('MySpecialFeature', $conditionBagMock, true);
 
@@ -42,18 +42,18 @@ class FlagTest extends PHPUnit_Framework_TestCase
 
     public function testGetConfigReturnsArray()
     {
-        $conditionBagMock = $this->getMock(ConditionBag::class);
+        $conditionBagMock = $this->createMock(ConditionBag::class);
 
         $sut = new Flag('MySpecialFeature', $conditionBagMock, false);
 
-        $this->assertInternalType('array', $sut->getConfig());
+        self::assertIsArray($sut->getConfig());
     }
 
     public function testAddConditionThrowsException()
     {
-        $this->setExpectedException(InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
 
-        $conditionBagMock = $this->getMock(ConditionBag::class);
+        $conditionBagMock = $this->createMock(ConditionBag::class);
         $conditionBagMock->method('has')
             ->willReturn(false);
 
@@ -65,7 +65,7 @@ class FlagTest extends PHPUnit_Framework_TestCase
 
     public function testToString()
     {
-        $conditionBagMock = $this->getMock(ConditionBag::class);
+        $conditionBagMock = $this->createMock(ConditionBag::class);
 
         $sut = new Flag('MySpecialFeature', $conditionBagMock, true);
 

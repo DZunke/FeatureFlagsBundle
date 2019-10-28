@@ -6,9 +6,9 @@ use DZunke\FeatureFlagsBundle\Context;
 use DZunke\FeatureFlagsBundle\Toggle\Conditions\AbstractCondition;
 use DZunke\FeatureFlagsBundle\Toggle\Conditions\ConditionInterface;
 use DZunke\FeatureFlagsBundle\Toggle\Conditions\IpAddress;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class IpAddressTest extends PHPUnit_Framework_TestCase
+class IpAddressTest extends TestCase
 {
 
     public function testItExtendsCorrectly()
@@ -21,7 +21,7 @@ class IpAddressTest extends PHPUnit_Framework_TestCase
 
     public function testItReturnsTrue()
     {
-        $contextMock = $this->getMock(Context::class);
+        $contextMock = $this->createMock(Context::class);
         $contextMock->method('get')->will($this->onConsecutiveCalls('127.0.0.1', '169.168.1.12'));
 
         $sut = new IpAddress();

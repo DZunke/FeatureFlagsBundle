@@ -5,27 +5,27 @@ namespace DZunke\FeatureFlagsBundle\Tests\Toggle\Condition;
 use DZunke\FeatureFlagsBundle\Toggle\Conditions\AbstractCondition;
 use DZunke\FeatureFlagsBundle\Toggle\Conditions\ConditionInterface;
 use DZunke\FeatureFlagsBundle\Toggle\Conditions\Device;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\HeaderBag;
 use Symfony\Component\HttpFoundation\Request;
-use PHPUnit_Framework_MockObject_MockObject;
+use Symfony\Component\HttpFoundation\RequestStack;
 
-class DeviceTest extends PHPUnit_Framework_TestCase
+class DeviceTest extends TestCase
 {
 
     /**
-     * @var Request|PHPUnit_Framework_MockObject_MockObject
+     * @var RequestStack
      */
-    private $request;
+    private $requestStackMock;
 
-    public function setUp()
+    public function setUp() : void
     {
-        $this->request = $this->getMock(Request::class);
+        $this->requestStackMock = $this->createMock(RequestStack::class);
     }
 
     public function testItExtendsCorrectly()
     {
-        $sut = new Device($this->request);
+        $sut = new Device($this->requestStackMock);
 
         $this->assertInstanceOf(AbstractCondition::class, $sut);
         $this->assertInstanceOf(ConditionInterface::class, $sut);
@@ -33,33 +33,37 @@ class DeviceTest extends PHPUnit_Framework_TestCase
 
     public function testIsReturnsFalseItConfigIsIncorrect()
     {
-        $sut = new Device($this->request);
+        $sut = new Device($this->requestStackMock);
 
         $this->assertFalse($sut->validate(null));
     }
 
     public function testItReturnsFalseIfUserAgentDoesNotExistInArray()
     {
-        $headerBagMock = $this->getMock(HeaderBag::class);
+        $headerBagMock = $this->createMock(HeaderBag::class);
         $headerBagMock->method('get')->with('User-Agent')->willReturn('Custom-User-Agent');
 
-        $requestMock = $this->getMock(Request::class);
+        $requestMock = $this->createMock(Request::class);
         $requestMock->headers = $headerBagMock;
 
-        $sut = new Device($requestMock);
+        $this->requestStackMock->method('getMasterRequest')->willReturn($requestMock);
+
+        $sut = new Device($this->requestStackMock);
 
         $this->assertFalse($sut->validate([], null));
     }
 
     public function testItReturnsBoolWhenCallingValidateWithoutArgument()
     {
-        $headerBagMock = $this->getMock(HeaderBag::class);
+        $headerBagMock = $this->createMock(HeaderBag::class);
         $headerBagMock->method('get')->with('User-Agent')->will($this->onConsecutiveCalls('Matched-User-Agent', 'Random-User-Agent'));
 
-        $requestMock = $this->getMock(Request::class);
+        $requestMock = $this->createMock(Request::class);
         $requestMock->headers = $headerBagMock;
 
-        $sut = new Device($requestMock);
+        $this->requestStackMock->method('getMasterRequest')->willReturn($requestMock);
+
+        $sut = new Device($this->requestStackMock);
 
         $array = [
             'first-agents' => '/^Custom-Agent-1|Custom-Agent-2|Custom-Agent-3|Custom-Agent-4$/',
@@ -72,13 +76,15 @@ class DeviceTest extends PHPUnit_Framework_TestCase
 
     public function testItReturnsBoolWhenCallingValidateWithArgument()
     {
-        $headerBagMock = $this->getMock(HeaderBag::class);
+        $headerBagMock = $this->createMock(HeaderBag::class);
         $headerBagMock->method('get')->with('User-Agent')->willReturn('Custom-Agent-3', 'Random-User-Agent');
 
-        $requestMock = $this->getMock(Request::class);
+        $requestMock = $this->createMock(Request::class);
         $requestMock->headers = $headerBagMock;
 
-        $sut = new Device($requestMock);
+        $this->requestStackMock->method('getMasterRequest')->willReturn($requestMock);
+
+        $sut = new Device($this->requestStackMock);
 
         $array = [
             'first-agents' => '/^Custom-Agent-1|Custom-Agent-2|Custom-Agent-3|Custom-Agent-4$/',
@@ -91,7 +97,7 @@ class DeviceTest extends PHPUnit_Framework_TestCase
 
     public function testToString()
     {
-        $sut = new Device($this->request);
+        $sut = new Device($this->requestStackMock);
 
         $this->assertSame('device', (string) $sut);
     }

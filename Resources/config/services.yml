@@ -5,7 +5,12 @@ services:
     dz.feature_flags.context:
         class: DZunke\FeatureFlagsBundle\Context
 
+    feature:
+        alias: dz.feature_flags.toggle
+        public: true
+
     dz.feature_flags.toggle:
+        public: true
         class: DZunke\FeatureFlagsBundle\Toggle
 
     dz.feature_flags.conditions_bag:
@@ -53,3 +58,11 @@ services:
         arguments: ["@dz.feature_flags.toggle"]
         tags:
             - { name: twig.extension }
+
+    dz.feature_flags.debug.command:
+        class: DZunke\FeatureFlagsBundle\Command\DebugFlagsCommand
+        arguments:
+            - '@dz.feature_flags.toggle'
+            - '@dz.feature_flags.conditions_bag'
+        tags:
+            - { name: console.command }

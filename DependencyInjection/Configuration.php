@@ -11,8 +11,8 @@ class Configuration implements ConfigurationInterface
 
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode    = $treeBuilder->root('d_zunke_feature_flags');
+        $treeBuilder = new TreeBuilder('d_zunke_feature_flags');
+        $rootNode    = $treeBuilder->getRootNode();
 
         $rootNode->children()
             ->booleanNode('default')
@@ -31,12 +31,13 @@ class Configuration implements ConfigurationInterface
      */
     private function addFlags()
     {
-        $treeBuilder = new TreeBuilder();
-        $node        = $treeBuilder->root('flags');
+        $treeBuilder = new TreeBuilder('flags');
+        $node        = $treeBuilder->getRootNode();
 
         /** @var $connectionNode ArrayNodeDefinition */
         $mainNode = $node->useAttributeAsKey('feature')
-            ->cannotBeEmpty()
+            ->isRequired()
+            ->requiresAtLeastOneElement()
             ->info('feature flags for the built system')
             ->prototype('array');
 
@@ -46,8 +47,8 @@ class Configuration implements ConfigurationInterface
                 ->defaultFalse()
             ->end()
             ->arrayNode('conditions_config')
+                ->requiresAtLeastOneElement()
                 ->info('list of configured conditions which must be true to set this flag active')
-                ->cannotBeEmpty()
                 ->prototype('variable')
             ->end()
         ->end();

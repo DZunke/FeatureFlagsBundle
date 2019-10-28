@@ -6,18 +6,19 @@ use DZunke\FeatureFlagsBundle\Toggle\Conditions\AbstractCondition;
 use DZunke\FeatureFlagsBundle\Toggle\Conditions\ConditionInterface;
 use DZunke\FeatureFlagsBundle\Toggle\Conditions\Percentage;
 use Exception;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 
-class PercentageTest extends PHPUnit_Framework_TestCase
+class PercentageTest extends TestCase
 {
 
     public function testItExtendsCorrectly()
     {
-        $request = $this->getMock(Request::class);
+        $requestStackMock = $this->createMock(RequestStack::class);
 
-        $sut = new Percentage($request);
+        $sut = new Percentage($requestStackMock);
 
         $this->assertInstanceOf(AbstractCondition::class, $sut);
         $this->assertInstanceOf(ConditionInterface::class, $sut);
@@ -25,24 +26,27 @@ class PercentageTest extends PHPUnit_Framework_TestCase
 
     public function testItThrowsExceptionWhenPercentageIsNotSet()
     {
-        $this->setExpectedException(Exception::class);
+        $this->expectException(Exception::class);
 
-        $request = $this->getMock(Request::class);
+        $requestStackMock = $this->createMock(RequestStack::class);
 
-        $sut = new Percentage($request);
+        $sut = new Percentage($requestStackMock);
         $sut->validate([], 'nothing');
     }
 
     public function testItReturnsTrueWhenCookieIsAlreadySet()
     {
-        $parameterBagMock = $this->getMock(ParameterBag::class);
+        $parameterBagMock = $this->createMock(ParameterBag::class);
         $parameterBagMock->method('has')->willReturn(true);
         $parameterBagMock->method('get')->willReturn(1);
 
-        $requestMock = $this->getMock(Request::class);
+        $requestMock = $this->createMock(Request::class);
         $requestMock->cookies = $parameterBagMock;
 
-        $sut = new Percentage($requestMock);
+        $requestStackMock = $this->createMock(RequestStack::class);
+        $requestStackMock->method('getMasterRequest')->willReturn($requestMock);
+
+        $sut = new Percentage($requestStackMock);
         $this->assertTrue($sut->validate([
             'percentage' => 798,
         ]));
@@ -50,19 +54,24 @@ class PercentageTest extends PHPUnit_Framework_TestCase
 
     public function testItReturnsBoolWhenCookieIsNotSet()
     {
-        $parameterBagMock = $this->getMock(ParameterBag::class);
+        $parameterBagMock = $this->createMock(ParameterBag::class);
         $parameterBagMock->method('has')->willReturn(true);
 
-        $requestMock = $this->getMock(Request::class);
+        $requestMock = $this->createMock(Request::class);
         $requestMock->cookies = $parameterBagMock;
 
-        $sut = new Percentage($requestMock);
-        $this->assertInternalType('bool', $sut->validate(['percentage' => 3]));
+        $requestStackMock = $this->createMock(RequestStack::class);
+        $requestStackMock->method('getMasterRequest')->willReturn($requestMock);
+
+        $sut = new Percentage($requestStackMock);
+        self::assertIsBool($sut->validate(['percentage' => 3]));
     }
 
     public function testToString()
     {
-        $sut = new Percentage($this->getMock(Request::class));
+        $requestStackMock = $this->createMock(RequestStack::class);
+
+        $sut = new Percentage($requestStackMock);
 
         $this->assertSame('percentage', (string) $sut);
     }

@@ -1,15 +1,6 @@
-Version 1.2.1
-=============
-- Fix composer.json, Symfony 3.0 is not supported anymore - use v2.1.0
-
-Version 1.2.0
-=============
-- Re-Enable Symfony 2.3 - use v2.0 for Symfony 3.0 compatible version
-- Implement new Toggle "Date" (@antoligy)
-
-Version 1.1.0
-=============
-
-- Fix for loading additional toggles with extensions (@benniezwerver)
-- Implementing TravisCI 
-- Upgrade to Symfony 3.0
+Version 4.0
+===========
+* Remove symfony 3 compability
+* Set min php version to 7.2 as requirment for coming code styling
+* Pass tree root via constructor (thanks @elonmir)
+* Update phpunit to v8

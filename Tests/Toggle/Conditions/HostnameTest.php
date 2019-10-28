@@ -6,8 +6,9 @@ use DZunke\FeatureFlagsBundle\Context;
 use DZunke\FeatureFlagsBundle\Toggle\Conditions\AbstractCondition;
 use DZunke\FeatureFlagsBundle\Toggle\Conditions\ConditionInterface;
 use DZunke\FeatureFlagsBundle\Toggle\Conditions\Hostname;
+use PHPUnit\Framework\TestCase;
 
-class HostnameTest extends \PHPUnit_Framework_TestCase
+class HostnameTest extends TestCase
 {
 
     public function testItExtendsCorrectly()
@@ -20,7 +21,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
 
     public function testItReturnsBoolean()
     {
-        $contextMock = $this->getMock(Context::class);
+        $contextMock = $this->createMock(Context::class);
         $contextMock->method('get')->will($this->onConsecutiveCalls('myhostname', 'thirdhostname'));
 
         $sut = new Hostname();
