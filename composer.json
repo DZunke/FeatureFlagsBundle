@@ -18,11 +18,12 @@
         "symfony/dependency-injection": "~4.0",
         "symfony/config": "~4.0",
         "symfony/console": "~4.0",
-        "symfony/twig-bridge": "~4.0"
+        "symfony/twig-bridge": "~4.0",
+        "symfony/yaml": "~4.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "~5",
-        "twig/twig": "~2"
+        "twig/twig": "~2",
+        "phpunit/phpunit": "~8"
     },
     "autoload": {
         "psr-0": { "DZunke\\FeatureFlagsBundle": "" }

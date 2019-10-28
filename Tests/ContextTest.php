@@ -3,9 +3,9 @@
 namespace DZunke\FeatureFlagsBundle\Tests;
 
 use DZunke\FeatureFlagsBundle\Context;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class ContextTest extends PHPUnit_Framework_TestCase
+class ContextTest extends TestCase
 {
 
     public function testGetAndSet()
@@ -21,7 +21,7 @@ class ContextTest extends PHPUnit_Framework_TestCase
         $sut = new Context();
         $sut->set('first', 'value');
 
-        $this->assertInternalType('array', $sut->all());
+        self::assertIsArray($sut->all());
         $this->assertSame(1, count($sut->all()));
     }
 

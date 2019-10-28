@@ -5,21 +5,20 @@ namespace DZunke\FeatureFlagsBundle\Tests\Toggle\Condition;
 use DZunke\FeatureFlagsBundle\Toggle\Conditions\AbstractCondition;
 use DZunke\FeatureFlagsBundle\Toggle\Conditions\ConditionInterface;
 use DZunke\FeatureFlagsBundle\Toggle\Conditions\Device;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\HeaderBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use PHPUnit_Framework_MockObject_MockObject;
 
-class DeviceTest extends PHPUnit_Framework_TestCase
+class DeviceTest extends TestCase
 {
 
     /**
-     * @var RequestStack|PHPUnit_Framework_MockObject_MockObject
+     * @var RequestStack
      */
     private $requestStackMock;
 
-    public function setUp()
+    public function setUp() : void
     {
         $this->requestStackMock = $this->createMock(RequestStack::class);
     }

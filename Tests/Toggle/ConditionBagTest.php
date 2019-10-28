@@ -4,12 +4,12 @@ namespace DZunke\FeatureFlagsBundle\Tests\Toggle;
 
 use DZunke\FeatureFlagsBundle\Toggle\ConditionBag;
 use DZunke\FeatureFlagsBundle\Toggle\Conditions\ConditionInterface;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use IteratorAggregate;
 use Countable;
 use ArrayIterator;
 
-class ConditionBagTest extends PHPUnit_Framework_TestCase
+class ConditionBagTest extends TestCase
 {
 
     public function testItImplementsClasses()
@@ -29,10 +29,10 @@ class ConditionBagTest extends PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(ArrayIterator::class, $sut->getIterator());
         $this->assertCount(1, $sut);
-        $this->assertInternalType('array', $sut->all());
+        self::assertIsArray($sut->all());
         $this->assertNull($sut->get('test'));
         $this->assertInstanceOf(ConditionInterface::class, $sut->get('test_condition'));
-        $this->assertInternalType('array', $sut->keys());
+        self::assertIsArray($sut->keys());
         $this->assertCount(1, $sut->keys());
         $this->assertFalse($sut->has('test'));
         $this->assertTrue($sut->has('test_condition'));
