@@ -3,6 +3,7 @@ Version 3.x
 - Remove Deprecated ContainerAwareCommand (by @kejwmen)
 - Update travis matrix for current symfony versions
 - Remove deprecations from phpunit
+- added additional tests
 
 Version 3.0
 ===========
