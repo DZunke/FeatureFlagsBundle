@@ -21,7 +21,7 @@ class ConditionBagTest extends PHPUnit_Framework_TestCase
 
     public function testConditionBag()
     {
-        $conditionMock = $this->getMock(ConditionInterface::class);
+        $conditionMock = $this->createMock(ConditionInterface::class);
         $conditionMock->method('__toString')->willReturn('test_condition');
 
         $sut = new ConditionBag();
