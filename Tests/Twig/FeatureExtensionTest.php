@@ -4,10 +4,10 @@ namespace DZunke\FeatureFlagsBundle\Tests\Twig;
 
 use DZunke\FeatureFlagsBundle\Toggle;
 use DZunke\FeatureFlagsBundle\Twig\FeatureExtension;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Twig\TwigFunction;
 
-class FeatureExtensionTest extends PHPUnit_Framework_TestCase
+class FeatureExtensionTest extends TestCase
 {
 
     public function testGetFunctions()

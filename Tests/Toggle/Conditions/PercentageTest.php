@@ -6,12 +6,12 @@ use DZunke\FeatureFlagsBundle\Toggle\Conditions\AbstractCondition;
 use DZunke\FeatureFlagsBundle\Toggle\Conditions\ConditionInterface;
 use DZunke\FeatureFlagsBundle\Toggle\Conditions\Percentage;
 use Exception;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class PercentageTest extends PHPUnit_Framework_TestCase
+class PercentageTest extends TestCase
 {
 
     public function testItExtendsCorrectly()
@@ -64,7 +64,7 @@ class PercentageTest extends PHPUnit_Framework_TestCase
         $requestStackMock->method('getMasterRequest')->willReturn($requestMock);
 
         $sut = new Percentage($requestStackMock);
-        $this->assertInternalType('bool', $sut->validate(['percentage' => 3]));
+        self::assertIsBool($sut->validate(['percentage' => 3]));
     }
 
     public function testToString()

@@ -3,9 +3,9 @@
 namespace DZunke\FeatureFlagsBundle\Tests;
 
 use DZunke\FeatureFlagsBundle\Toggle;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class ToggleTest extends PHPUnit_Framework_TestCase
+class ToggleTest extends TestCase
 {
 
     public function testDefaultStateIsTrue()

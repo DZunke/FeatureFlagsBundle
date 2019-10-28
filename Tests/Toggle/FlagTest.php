@@ -5,10 +5,10 @@ namespace DZunke\FeatureFlagsBundle\Tests\Toggle;
 use DZunke\FeatureFlagsBundle\Toggle\ConditionBag;
 use DZunke\FeatureFlagsBundle\Toggle\Conditions\ConditionInterface;
 use DZunke\FeatureFlagsBundle\Toggle\Flag;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use InvalidArgumentException;
 
-class FlagTest extends PHPUnit_Framework_TestCase
+class FlagTest extends TestCase
 {
 
     public function testIsActiveReturnsBool()
@@ -46,7 +46,7 @@ class FlagTest extends PHPUnit_Framework_TestCase
 
         $sut = new Flag('MySpecialFeature', $conditionBagMock, false);
 
-        $this->assertInternalType('array', $sut->getConfig());
+        self::assertIsArray($sut->getConfig());
     }
 
     public function testAddConditionThrowsException()

@@ -6,8 +6,9 @@ use DZunke\FeatureFlagsBundle\Context;
 use DZunke\FeatureFlagsBundle\Toggle\Conditions\AbstractCondition;
 use DZunke\FeatureFlagsBundle\Toggle\Conditions\ConditionInterface;
 use DZunke\FeatureFlagsBundle\Toggle\Conditions\Hostname;
+use PHPUnit\Framework\TestCase;
 
-class HostnameTest extends \PHPUnit_Framework_TestCase
+class HostnameTest extends TestCase
 {
 
     public function testItExtendsCorrectly()

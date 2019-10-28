@@ -6,10 +6,10 @@ use DZunke\FeatureFlagsBundle\Context;
 use DZunke\FeatureFlagsBundle\Toggle\Conditions\AbstractCondition;
 use DZunke\FeatureFlagsBundle\Toggle\Conditions\ConditionInterface;
 use DZunke\FeatureFlagsBundle\Toggle\Conditions\Date;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
-class DateTest extends PHPUnit_Framework_TestCase
+class DateTest extends TestCase
 {
     /**
      * @var string
