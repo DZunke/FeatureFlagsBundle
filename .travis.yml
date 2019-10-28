@@ -22,7 +22,12 @@ env:
 
 before_install:
   - composer self-update
-  - if [ "$SYMFONY_VERSION" != "" ]; then composer require --no-update symfony/framework-bundle:${SYMFONY_VERSION}; fi;
+  - if [ "$SYMFONY_VERSION" != "" ]; then composer require --no-update symfony/http-foundation:${SYMFONY_VERSION}; fi;
+  - if [ "$SYMFONY_VERSION" != "" ]; then composer require --no-update symfony/http-kernel:${SYMFONY_VERSION}; fi;
+  - if [ "$SYMFONY_VERSION" != "" ]; then composer require --no-update symfony/dependency-injection:${SYMFONY_VERSION}; fi;
+  - if [ "$SYMFONY_VERSION" != "" ]; then composer require --no-update symfony/config:${SYMFONY_VERSION}; fi;
+  - if [ "$SYMFONY_VERSION" != "" ]; then composer require --no-update symfony/console:${SYMFONY_VERSION}; fi;
+  - if [ "$SYMFONY_VERSION" != "" ]; then composer require --no-update symfony/twig-bridge:${SYMFONY_VERSION}; fi;
 
 install:
   - if [ "$deps" = "no" ]; then composer install; fi;
