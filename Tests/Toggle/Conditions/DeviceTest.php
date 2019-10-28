@@ -21,7 +21,7 @@ class DeviceTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->requestStackMock = $this->getMock(RequestStack::class);
+        $this->requestStackMock = $this->createMock(RequestStack::class);
     }
 
     public function testItExtendsCorrectly()
@@ -41,10 +41,10 @@ class DeviceTest extends PHPUnit_Framework_TestCase
 
     public function testItReturnsFalseIfUserAgentDoesNotExistInArray()
     {
-        $headerBagMock = $this->getMock(HeaderBag::class);
+        $headerBagMock = $this->createMock(HeaderBag::class);
         $headerBagMock->method('get')->with('User-Agent')->willReturn('Custom-User-Agent');
 
-        $requestMock = $this->getMock(Request::class);
+        $requestMock = $this->createMock(Request::class);
         $requestMock->headers = $headerBagMock;
 
         $this->requestStackMock->method('getMasterRequest')->willReturn($requestMock);
@@ -56,10 +56,10 @@ class DeviceTest extends PHPUnit_Framework_TestCase
 
     public function testItReturnsBoolWhenCallingValidateWithoutArgument()
     {
-        $headerBagMock = $this->getMock(HeaderBag::class);
+        $headerBagMock = $this->createMock(HeaderBag::class);
         $headerBagMock->method('get')->with('User-Agent')->will($this->onConsecutiveCalls('Matched-User-Agent', 'Random-User-Agent'));
 
-        $requestMock = $this->getMock(Request::class);
+        $requestMock = $this->createMock(Request::class);
         $requestMock->headers = $headerBagMock;
 
         $this->requestStackMock->method('getMasterRequest')->willReturn($requestMock);
@@ -77,10 +77,10 @@ class DeviceTest extends PHPUnit_Framework_TestCase
 
     public function testItReturnsBoolWhenCallingValidateWithArgument()
     {
-        $headerBagMock = $this->getMock(HeaderBag::class);
+        $headerBagMock = $this->createMock(HeaderBag::class);
         $headerBagMock->method('get')->with('User-Agent')->willReturn('Custom-Agent-3', 'Random-User-Agent');
 
-        $requestMock = $this->getMock(Request::class);
+        $requestMock = $this->createMock(Request::class);
         $requestMock->headers = $headerBagMock;
 
         $this->requestStackMock->method('getMasterRequest')->willReturn($requestMock);

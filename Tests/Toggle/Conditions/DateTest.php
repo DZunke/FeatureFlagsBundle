@@ -43,7 +43,7 @@ class DateTest extends PHPUnit_Framework_TestCase
      */
     public function getInstanceOfDate()
     {
-        $contextMock = $this->getMock(Context::class);
+        $contextMock = $this->createMock(Context::class);
 
         $date = new Date();
         $date->setContext($contextMock);

@@ -16,7 +16,7 @@ class PercentageTest extends PHPUnit_Framework_TestCase
 
     public function testItExtendsCorrectly()
     {
-        $requestStackMock = $this->getMock(RequestStack::class);
+        $requestStackMock = $this->createMock(RequestStack::class);
 
         $sut = new Percentage($requestStackMock);
 
@@ -26,9 +26,9 @@ class PercentageTest extends PHPUnit_Framework_TestCase
 
     public function testItThrowsExceptionWhenPercentageIsNotSet()
     {
-        $this->setExpectedException(Exception::class);
+        $this->expectException(Exception::class);
 
-        $requestStackMock = $this->getMock(RequestStack::class);
+        $requestStackMock = $this->createMock(RequestStack::class);
 
         $sut = new Percentage($requestStackMock);
         $sut->validate([], 'nothing');
@@ -36,14 +36,14 @@ class PercentageTest extends PHPUnit_Framework_TestCase
 
     public function testItReturnsTrueWhenCookieIsAlreadySet()
     {
-        $parameterBagMock = $this->getMock(ParameterBag::class);
+        $parameterBagMock = $this->createMock(ParameterBag::class);
         $parameterBagMock->method('has')->willReturn(true);
         $parameterBagMock->method('get')->willReturn(1);
 
-        $requestMock = $this->getMock(Request::class);
+        $requestMock = $this->createMock(Request::class);
         $requestMock->cookies = $parameterBagMock;
 
-        $requestStackMock = $this->getMock(RequestStack::class);
+        $requestStackMock = $this->createMock(RequestStack::class);
         $requestStackMock->method('getMasterRequest')->willReturn($requestMock);
 
         $sut = new Percentage($requestStackMock);
@@ -54,13 +54,13 @@ class PercentageTest extends PHPUnit_Framework_TestCase
 
     public function testItReturnsBoolWhenCookieIsNotSet()
     {
-        $parameterBagMock = $this->getMock(ParameterBag::class);
+        $parameterBagMock = $this->createMock(ParameterBag::class);
         $parameterBagMock->method('has')->willReturn(true);
 
-        $requestMock = $this->getMock(Request::class);
+        $requestMock = $this->createMock(Request::class);
         $requestMock->cookies = $parameterBagMock;
 
-        $requestStackMock = $this->getMock(RequestStack::class);
+        $requestStackMock = $this->createMock(RequestStack::class);
         $requestStackMock->method('getMasterRequest')->willReturn($requestMock);
 
         $sut = new Percentage($requestStackMock);
@@ -69,7 +69,7 @@ class PercentageTest extends PHPUnit_Framework_TestCase
 
     public function testToString()
     {
-        $requestStackMock = $this->getMock(RequestStack::class);
+        $requestStackMock = $this->createMock(RequestStack::class);
 
         $sut = new Percentage($requestStackMock);
 

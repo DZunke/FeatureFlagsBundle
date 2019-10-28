@@ -5,25 +5,25 @@ namespace DZunke\FeatureFlagsBundle\Tests\Twig;
 use DZunke\FeatureFlagsBundle\Toggle;
 use DZunke\FeatureFlagsBundle\Twig\FeatureExtension;
 use PHPUnit_Framework_TestCase;
-use Twig_SimpleFunction;
+use Twig\TwigFunction;
 
 class FeatureExtensionTest extends PHPUnit_Framework_TestCase
 {
 
     public function testGetFunctions()
     {
-        $toggleMock = $this->getMock(Toggle::class);
+        $toggleMock = $this->createMock(Toggle::class);
 
-        $sut = new FeatureExtension($toggleMock);
+        $sut       = new FeatureExtension($toggleMock);
         $functions = $sut->getFunctions();
 
         $this->assertSame(1, count($functions));
-        $this->assertInstanceOf(Twig_SimpleFunction::class, reset($functions));
+        $this->assertInstanceOf(TwigFunction::class, reset($functions));
     }
 
     public function testGetName()
     {
-        $toggleMock = $this->getMock(Toggle::class);
+        $toggleMock = $this->createMock(Toggle::class);
 
         $sut = new FeatureExtension($toggleMock);
 
