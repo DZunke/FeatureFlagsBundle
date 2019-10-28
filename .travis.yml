@@ -12,20 +12,20 @@ php:
 matrix:
   include:
     - php: 7.2
-      env: SYMFONY_VERSION="3.4.*"
+      env: SYMFONY_VERSION="^3.4"
     - php: 7.2
-      env: SYMFONY_VERSION="4.0.*"
-      
+      env: SYMFONY_VERSION="^4.3"
+
 env:
   global:
     - deps=no
 
 before_install:
   - composer self-update
-  - if [ "$SYMFONY_VERSION" != "" ]; then composer require --no-update symfony/symfony:${SYMFONY_VERSION}; fi;
+  - if [ "$SYMFONY_VERSION" != "" ]; then composer require --no-update symfony/framework-bundle:${SYMFONY_VERSION}; fi;
 
 install:
-  - if [ "$deps" = "no" ]; then composer update; fi;
+  - if [ "$deps" = "no" ]; then composer install; fi;
   - if [ "$deps" = "low" ]; then composer --prefer-lowest --prefer-stable update; fi;
 
 script:
