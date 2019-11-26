@@ -3,8 +3,10 @@
 namespace DZunke\FeatureFlagsBundle\Twig;
 
 use DZunke\FeatureFlagsBundle\Toggle;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class FeatureExtension extends \Twig_Extension
+class FeatureExtension extends AbstractExtension
 {
 
     /**
@@ -23,7 +25,7 @@ class FeatureExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('has_feature', [$this, 'checkFeature'], ['is_safe' => ['html']]),
+            new TwigFunction('has_feature', [$this, 'checkFeature'], ['is_safe' => ['html']]),
         ];
     }
 
