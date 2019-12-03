@@ -22,7 +22,7 @@
         "symfony/yaml": "~4.0|~5.0"
     },
     "require-dev": {
-        "twig/twig": "~2",
+        "twig/twig": "~2.0|~3.0",
         "phpunit/phpunit": "~8"
     },
     "autoload": {
