@@ -1,3 +1,7 @@
+Version 4.2
+===========
+* Fix Deprecation of Request-Injection in Service Definition (thanks @benr77)
+
 Version 4.1
 ===========
 * Compability for Twig 3 (thanks @benr77)
