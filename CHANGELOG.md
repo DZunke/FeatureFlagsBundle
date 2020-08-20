@@ -1,3 +1,7 @@
+Version 5.0
+===========
+* Support up to Symfony 5.1
+
 Version 4.2
 ===========
 * Fix Deprecation of Request-Injection in Service Definition (thanks @benr77)
