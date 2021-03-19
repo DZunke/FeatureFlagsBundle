@@ -1,7 +1,10 @@
 name: CI
 on:
     pull_request: ~
-    push: ~
+    push:
+        branches:
+            - master
+            - 5.x-dev
 
 jobs:
     ci:
@@ -11,7 +14,7 @@ jobs:
             matrix:
                 php: [ '7.4', '8.0' ]
                 symfony: [ '^4.3', '^5.0' ]
-                composer-options: '--prefer-lowest --prefer-stable'
+                composer-options: ['--prefer-lowest --prefer-stable']
 
         name: PHP ${{ matrix.php }}
 
