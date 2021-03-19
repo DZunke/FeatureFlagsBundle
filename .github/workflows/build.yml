@@ -1,0 +1,43 @@
+name: CI
+on:
+    pull_request: ~
+    push: ~
+
+jobs:
+    ci:
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                php: [ '7.4', '8.0' ]
+                symfony: [ '^4.3', '^5.0' ]
+                composer-options: '--prefer-lowest --prefer-stable'
+
+        name: PHP ${{ matrix.php }}
+
+        steps:
+            -   name: Checkout
+                uses: actions/checkout@v2
+
+            -   uses: shivammathur/setup-php@v2
+                with:
+                    php-version: ${{ matrix.php }}
+
+            -   name: Load symfony version packages
+                run: |
+                    composer require --no-update symfony/http-foundation:${{ matrix.symfony }}; fi;
+                    composer require --no-update symfony/http-kernel:${{ matrix.symfony }}; fi;
+                    composer require --no-update symfony/dependency-injection:${{ matrix.symfony }}; fi;
+                    composer require --no-update symfony/config:${{ matrix.symfony }}; fi;
+                    composer require --no-update symfony/console:${{ matrix.symfony }}; fi;
+                    composer require --no-update symfony/twig-bridge:${{ matrix.symfony }}; fi;
+
+            -   uses: "ramsey/composer-install@v1"
+                with:
+                    composer-options: ${{ matrix.composer-options }}
+
+            -   name: Linting PHP
+                run: make lint-php
+
+            -   name: Unit Tests
+                run: ./vendor/bin/phpunit -v
