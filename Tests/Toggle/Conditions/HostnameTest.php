@@ -1,6 +1,6 @@
 <?php
 
-namespace DZunke\FeatureFlagsBundle\Tests\Toggle\Condition;
+namespace DZunke\FeatureFlagsBundle\Tests\Toggle\Conditions;
 
 use DZunke\FeatureFlagsBundle\Context;
 use DZunke\FeatureFlagsBundle\Toggle\Conditions\AbstractCondition;
