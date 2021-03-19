@@ -34,9 +34,9 @@ jobs:
                     composer require --no-update symfony/console:${{ matrix.symfony }};
                     composer require --no-update symfony/twig-bridge:${{ matrix.symfony }};
 
-            -   uses: "ramsey/composer-install@v2"
+            -   uses: "ramsey/composer-install@v1"
                 with:
-                    composer-options: ${{ matrix.composer-options }}
+                    dependency-versions: "lowest"
 
             -   name: Linting PHP
                 run: make lint-php
