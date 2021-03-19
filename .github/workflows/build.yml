@@ -14,7 +14,6 @@ jobs:
             matrix:
                 php: [ '7.4', '8.0' ]
                 symfony: [ '^4.3', '^5.0' ]
-                composer-options: ['--prefer-lowest --prefer-stable']
 
         name: PHP ${{ matrix.php }}
 
@@ -35,7 +34,7 @@ jobs:
                     composer require --no-update symfony/console:${{ matrix.symfony }};
                     composer require --no-update symfony/twig-bridge:${{ matrix.symfony }};
 
-            -   uses: "ramsey/composer-install@v1"
+            -   uses: "ramsey/composer-install@v2"
                 with:
                     composer-options: ${{ matrix.composer-options }}
 
