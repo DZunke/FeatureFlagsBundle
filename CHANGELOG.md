@@ -1,3 +1,7 @@
+TBD
+==========
+* Fix namespace in test directory (thanks @benr77)
+
 Version 5.0
 ===========
 * Support up to Symfony 5.1
