@@ -28,12 +28,12 @@ jobs:
 
             -   name: Load symfony version packages
                 run: |
-                    composer require --no-update symfony/http-foundation:${{ matrix.symfony }}; fi;
-                    composer require --no-update symfony/http-kernel:${{ matrix.symfony }}; fi;
-                    composer require --no-update symfony/dependency-injection:${{ matrix.symfony }}; fi;
-                    composer require --no-update symfony/config:${{ matrix.symfony }}; fi;
-                    composer require --no-update symfony/console:${{ matrix.symfony }}; fi;
-                    composer require --no-update symfony/twig-bridge:${{ matrix.symfony }}; fi;
+                    composer require --no-update symfony/http-foundation:${{ matrix.symfony }};
+                    composer require --no-update symfony/http-kernel:${{ matrix.symfony }};
+                    composer require --no-update symfony/dependency-injection:${{ matrix.symfony }};
+                    composer require --no-update symfony/config:${{ matrix.symfony }};
+                    composer require --no-update symfony/console:${{ matrix.symfony }};
+                    composer require --no-update symfony/twig-bridge:${{ matrix.symfony }};
 
             -   uses: "ramsey/composer-install@v1"
                 with:
