@@ -1,6 +1,6 @@
 {
     "name": "dzunke/feature-flags-bundle",
-    "description": "Symfony2 Bundle to implement Feature Flags to your Application",
+    "description": "Symfony Bundle to implement Feature Flags to your Application",
     "keywords": ["symfony", "bundle", "feature flags"],
     "homepage": "https://github.com/DZunke/FeatureFlagsBundle",
     "license": "MIT",
