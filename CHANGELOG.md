@@ -1,4 +1,4 @@
-TBD
+Version 5.1
 ==========
 * Fix namespace in test directory (thanks @benr77)
 
