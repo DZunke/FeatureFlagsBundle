@@ -18,11 +18,7 @@ class Device extends AbstractCondition implements ConditionInterface
      */
     public function __construct(RequestStack $request)
     {
-        if (method_exists($request, 'getMainRequest')) {
-            $this->request = $request->getMainRequest();
-        } else {
-            $this->request = $request->getMasterRequest();
-        }
+        $this->request = $request->getMainRequest();
     }
 
     /**
