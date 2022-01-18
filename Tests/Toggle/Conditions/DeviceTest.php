@@ -46,7 +46,7 @@ class DeviceTest extends TestCase
         $requestMock = $this->createMock(Request::class);
         $requestMock->headers = $headerBagMock;
 
-        $this->requestStackMock->method('getMasterRequest')->willReturn($requestMock);
+        $this->requestStackMock->method('getMainRequest')->willReturn($requestMock);
 
         $sut = new Device($this->requestStackMock);
 
@@ -61,7 +61,7 @@ class DeviceTest extends TestCase
         $requestMock = $this->createMock(Request::class);
         $requestMock->headers = $headerBagMock;
 
-        $this->requestStackMock->method('getMasterRequest')->willReturn($requestMock);
+        $this->requestStackMock->method('getMainRequest')->willReturn($requestMock);
 
         $sut = new Device($this->requestStackMock);
 
@@ -82,7 +82,7 @@ class DeviceTest extends TestCase
         $requestMock = $this->createMock(Request::class);
         $requestMock->headers = $headerBagMock;
 
-        $this->requestStackMock->method('getMasterRequest')->willReturn($requestMock);
+        $this->requestStackMock->method('getMainRequest')->willReturn($requestMock);
 
         $sut = new Device($this->requestStackMock);
 
