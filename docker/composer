@@ -1,0 +1,3 @@
+#!/bin/bash
+
+./docker/php /usr/bin/composer $@

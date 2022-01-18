@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -e
+
+docker run -v $(pwd):/var/www/html -u 0:0 --rm lojassimonetti/php-apache-oci8-composer:${PHP_VERSION:-php8dot0} php -d memory_limit=-1 $@

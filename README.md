@@ -204,6 +204,43 @@ d_zunke_feature_flags:
             conditions_config:    []
 ```
 
+## Contributing
+
+The following commands can be used to perform the initial checkout of FeatureFlagsBundle:
+
+```bash
+$ git clone git@github.com:DZunke/FeatureFlagsBundle.git
+$ cd FeatureFlagsBundle
+```
+
+If you have a fork, change the account on the URL. Example:
+
+```diff
+- $ git clone git@github.com:DZunke/FeatureFlagsBundle.git
++ $ git clone git@github.com:YOUR-ACCOUNT/FeatureFlagsBundle.git
+```
+
+Install dependencies using [Composer](https://getcomposer.org/)
+
+```bash
+make deps
+```
+
+Now, you can run the PHPUnit Tests
+```bash
+make tests
+```
+
+### Docker
+
+If you want use docker instead of local PHP binary you must set the DOCKER variable before run the make command. Example:
+
+```bash
+$ DOCKER=true make deps
+$ DOCKER=true make tests
+$ DOCKER=true make lint-php
+```
+
 ## License
 
 FeatureFlagsBundle is licensed under the MIT license.
