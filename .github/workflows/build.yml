@@ -1,45 +1,45 @@
 name: CI
 on:
-    pull_request: ~
-    push:
-        branches:
-            - master
-            - 5.x-dev
+  pull_request: ~
+  push:
+    branches:
+      - master
+      - 5.x-dev
 
 jobs:
-    ci:
-        runs-on: ubuntu-latest
-        strategy:
-            fail-fast: false
-            matrix:
-                php: [ '7.4', '8.0' ]
-                symfony: [ '^4.3', '^5.0' ]
+  ci:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['7.4', '8.0']
+        symfony: ['^4.3', '^5.0']
 
-        name: PHP ${{ matrix.php }}
+    name: PHP ${{ matrix.php }}
 
-        steps:
-            -   name: Checkout
-                uses: actions/checkout@v2
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
-            -   uses: shivammathur/setup-php@v2
-                with:
-                    php-version: ${{ matrix.php }}
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
 
-            -   name: Load symfony version packages
-                run: |
-                    composer require --no-update symfony/http-foundation:${{ matrix.symfony }};
-                    composer require --no-update symfony/http-kernel:${{ matrix.symfony }};
-                    composer require --no-update symfony/dependency-injection:${{ matrix.symfony }};
-                    composer require --no-update symfony/config:${{ matrix.symfony }};
-                    composer require --no-update symfony/console:${{ matrix.symfony }};
-                    composer require --no-update symfony/twig-bridge:${{ matrix.symfony }};
+      - name: Load symfony version packages
+        run: |
+          composer require --no-update symfony/http-foundation:${{ matrix.symfony }};
+          composer require --no-update symfony/http-kernel:${{ matrix.symfony }};
+          composer require --no-update symfony/dependency-injection:${{ matrix.symfony }};
+          composer require --no-update symfony/config:${{ matrix.symfony }};
+          composer require --no-update symfony/console:${{ matrix.symfony }};
+          composer require --no-update symfony/twig-bridge:${{ matrix.symfony }};
 
-            -   uses: "ramsey/composer-install@v1"
-                with:
-                    dependency-versions: "lowest"
+      - uses: 'ramsey/composer-install@v1'
+        with:
+          dependency-versions: 'lowest'
 
-            -   name: Linting PHP
-                run: make lint-php
+      - name: Linting PHP
+        run: make lint-php
 
-            -   name: Unit Tests
-                run: ./vendor/bin/phpunit -v
+      - name: Unit Tests
+        run: ./vendor/bin/phpunit -v
