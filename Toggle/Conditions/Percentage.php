@@ -24,7 +24,11 @@ class Percentage extends AbstractCondition implements ConditionInterface
      */
     public function __construct(RequestStack $request)
     {
-        $this->request = $request->getMasterRequest();
+        if (method_exists($request, 'getMainRequest')) {
+            $this->request = $request->getMainRequest();
+        } else {
+            $this->request = $request->getMasterRequest();
+        }
     }
 
     /**

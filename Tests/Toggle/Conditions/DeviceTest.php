@@ -12,15 +12,24 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class DeviceTest extends TestCase
 {
-
     /**
      * @var RequestStack
      */
     private $requestStackMock;
 
+    /**
+     * @var string
+     */
+    private $mainRequestMethod = 'getMasterRequest';
+
     public function setUp() : void
     {
         $this->requestStackMock = $this->createMock(RequestStack::class);
+
+        if (method_exists($this->requestStackMock, 'getMainRequest'))
+        {
+            $this->mainRequestMethod = 'getMainRequest';
+        }
     }
 
     public function testItExtendsCorrectly()
@@ -46,7 +55,7 @@ class DeviceTest extends TestCase
         $requestMock = $this->createMock(Request::class);
         $requestMock->headers = $headerBagMock;
 
-        $this->requestStackMock->method('getMasterRequest')->willReturn($requestMock);
+        $this->requestStackMock->method($this->mainRequestMethod)->willReturn($requestMock);
 
         $sut = new Device($this->requestStackMock);
 
@@ -61,7 +70,7 @@ class DeviceTest extends TestCase
         $requestMock = $this->createMock(Request::class);
         $requestMock->headers = $headerBagMock;
 
-        $this->requestStackMock->method('getMasterRequest')->willReturn($requestMock);
+        $this->requestStackMock->method($this->mainRequestMethod)->willReturn($requestMock);
 
         $sut = new Device($this->requestStackMock);
 
@@ -82,7 +91,7 @@ class DeviceTest extends TestCase
         $requestMock = $this->createMock(Request::class);
         $requestMock->headers = $headerBagMock;
 
-        $this->requestStackMock->method('getMasterRequest')->willReturn($requestMock);
+        $this->requestStackMock->method($this->mainRequestMethod)->willReturn($requestMock);
 
         $sut = new Device($this->requestStackMock);
 
