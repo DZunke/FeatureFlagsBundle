@@ -23,7 +23,7 @@
     },
     "require-dev": {
         "twig/twig": "~2.0|~3.0",
-        "phpunit/phpunit": "~9"
+        "phpunit/phpunit": "~9.4"
     },
     "autoload": {
         "psr-0": { "DZunke\\FeatureFlagsBundle": "" }
