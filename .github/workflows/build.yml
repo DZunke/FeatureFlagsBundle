@@ -34,7 +34,7 @@ jobs:
           composer require --no-update symfony/console:${{ matrix.symfony }};
           composer require --no-update symfony/twig-bridge:${{ matrix.symfony }};
 
-      - uses: 'ramsey/composer-install@v1'
+      - uses: 'ramsey/composer-install@v2'
         with:
           dependency-versions: 'lowest'
 
