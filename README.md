@@ -209,6 +209,11 @@ d_zunke_feature_flags:
             conditions_config:    []
 ```
 
+## Resources
+
+- [Overview of Feature Flags](https://martinfowler.com/articles/feature-toggles.html)
+- [Discussion of feature flag best practices](https://betterprogramming.pub/feature-flag-2-0-how-to-take-your-kill-switch-to-the-next-level-643b5aa2676)
+
 ## License
 
 FeatureFlagsBundle is licensed under the MIT license.
