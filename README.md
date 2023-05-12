@@ -13,6 +13,7 @@ configured directly in Symfony-Configs.
 - Use Versions ^4.0 if Symfony 4.2 Support is wanted!
 - Use Versions ^5.0 if Symfony 4.3 or 5.x Support is wanted!
 - Use Versions ^6.0 if Symfony 6.0 Support is wanted!
+- Use Versions ^6.1 if Symfony >6.1 Support is wanted!
 
 ## Documentation
 
@@ -21,12 +22,12 @@ configured directly in Symfony-Configs.
 You can add the Bundle by running [Composer](http://getcomposer.org) on your shell or adding it directly to your composer.json
 
 ``` bash
-php composer.phar require dzunke/feature-flags-bundle:"^6.0"
+php composer.phar require dzunke/feature-flags-bundle:"^6.1"
 ```
 
 ``` json
 "require" :  {
-    "dzunke/feature-flags-bundle": "^6.0"
+    "dzunke/feature-flags-bundle": "^6.1"
 }
 ```
 The Namespace will be registered by autoloading with Composer but to use the integrated features for symfony you have to register the Bundle.
