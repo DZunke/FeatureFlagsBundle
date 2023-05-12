@@ -1,6 +1,9 @@
-# Symfony FeatureFlagsBundle [![License](https://poser.pugx.org/dzunke/feature-flags-bundle/license.svg)](https://packagist.org/packages/dzunke/feature-flags-bundle)
+# Symfony FeatureFlagsBundle 
 
-![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/DZunke/FeatureFlagsBundle/CI/master?style=for-the-badge)
+![Build Status](https://github.com/dzunke/feature-flags-bundle/actions/workflows/build.yml/badge.svg)
+[![Latest Stable Version](https://poser.pugx.org/dzunke/feature-flags-bundle/v)](//packagist.org/packages/dzunke/feature-flags-bundle)
+[![Total Downloads](https://poser.pugx.org/dzunke/feature-flags-bundle/downloads)](//packagist.org/packages/dzunke/feature-flags-bundle)
+[![License](https://poser.pugx.org/dzunke/feature-flags-bundle/license)](//packagist.org/packages/dzunke/feature-flags-bundle)
 
 The Bundle will allow you to implement Feature Flags to your Application.
 Please Note that there is no Interface available, so the Flags must be
