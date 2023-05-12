@@ -12,15 +12,24 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class DeviceTest extends TestCase
 {
-
     /**
      * @var RequestStack
      */
     private $requestStackMock;
 
+    /**
+     * @var string
+     */
+    private $mainRequestMethod = 'getMasterRequest';
+
     public function setUp() : void
     {
         $this->requestStackMock = $this->createMock(RequestStack::class);
+
+        if (method_exists($this->requestStackMock, 'getMainRequest'))
+        {
+            $this->mainRequestMethod = 'getMainRequest';
+        }
     }
 
     public function testItExtendsCorrectly()

@@ -13,6 +13,25 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class PercentageTest extends TestCase
 {
+    /**
+     * @var RequestStack
+     */
+    private $requestStackMock;
+
+    /**
+     * @var string
+     */
+    private $mainRequestMethod = 'getMasterRequest';
+
+    public function setUp() : void
+    {
+        $this->requestStackMock = $this->createMock(RequestStack::class);
+
+        if (method_exists($this->requestStackMock, 'getMainRequest'))
+        {
+            $this->mainRequestMethod = 'getMainRequest';
+        }
+    }
 
     public function testItExtendsCorrectly()
     {
@@ -28,9 +47,7 @@ class PercentageTest extends TestCase
     {
         $this->expectException(Exception::class);
 
-        $requestStackMock = $this->createMock(RequestStack::class);
-
-        $sut = new Percentage($requestStackMock);
+        $sut = new Percentage($this->requestStackMock);
         $sut->validate([], 'nothing');
     }
 
@@ -46,7 +63,7 @@ class PercentageTest extends TestCase
         $requestStackMock = $this->createMock(RequestStack::class);
         $requestStackMock->method('getMainRequest')->willReturn($requestMock);
 
-        $sut = new Percentage($requestStackMock);
+        $sut = new Percentage($this->requestStackMock);
         $this->assertTrue($sut->validate([
             'percentage' => 798,
         ]));
@@ -63,15 +80,13 @@ class PercentageTest extends TestCase
         $requestStackMock = $this->createMock(RequestStack::class);
         $requestStackMock->method('getMainRequest')->willReturn($requestMock);
 
-        $sut = new Percentage($requestStackMock);
+        $sut = new Percentage($this->requestStackMock);
         self::assertIsBool($sut->validate(['percentage' => 3]));
     }
 
     public function testToString()
     {
-        $requestStackMock = $this->createMock(RequestStack::class);
-
-        $sut = new Percentage($requestStackMock);
+        $sut = new Percentage($this->requestStackMock);
 
         $this->assertSame('percentage', (string) $sut);
     }
