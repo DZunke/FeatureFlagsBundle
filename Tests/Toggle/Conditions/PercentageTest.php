@@ -60,7 +60,8 @@ class PercentageTest extends TestCase
         $requestMock = $this->createMock(Request::class);
         $requestMock->cookies = $parameterBagMock;
 
-        $this->requestStackMock->method($this->mainRequestMethod)->willReturn($requestMock);
+        $requestStackMock = $this->createMock(RequestStack::class);
+        $requestStackMock->method('getMainRequest')->willReturn($requestMock);
 
         $sut = new Percentage($this->requestStackMock);
         $this->assertTrue($sut->validate([
@@ -76,7 +77,8 @@ class PercentageTest extends TestCase
         $requestMock = $this->createMock(Request::class);
         $requestMock->cookies = $parameterBagMock;
 
-        $this->requestStackMock->method($this->mainRequestMethod)->willReturn($requestMock);
+        $requestStackMock = $this->createMock(RequestStack::class);
+        $requestStackMock->method('getMainRequest')->willReturn($requestMock);
 
         $sut = new Percentage($this->requestStackMock);
         self::assertIsBool($sut->validate(['percentage' => 3]));

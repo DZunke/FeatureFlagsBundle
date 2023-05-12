@@ -10,10 +10,14 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class DebugFlagsCommand extends Command
 {
-    /** @var Toggle */
+    /**
+     * @var Toggle
+     */
     private $toggle;
 
-    /** @var Toggle\ConditionBag */
+    /**
+     * @var Toggle\ConditionBag
+     */
     private $conditionBag;
 
     public function __construct(Toggle $toggle, Toggle\ConditionBag $conditionBag)
@@ -31,7 +35,7 @@ class DebugFlagsCommand extends Command
     }
 
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln('');
         $output->writeln('<fg=cyan>Debugging Feature Flags</fg=cyan>');
@@ -59,6 +63,8 @@ class DebugFlagsCommand extends Command
         $this->renderFlagsTable($output);
 
         $output->writeln('');
+
+        return 0;
     }
 
     private function renderFlagsTable(OutputInterface $output)
