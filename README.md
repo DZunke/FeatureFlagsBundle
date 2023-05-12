@@ -6,10 +6,10 @@ The Bundle will allow you to implement Feature Flags to your Application.
 Please Note that there is no Interface available, so the Flags must be
 configured directly in Symfony-Configs.
 
-**Use Versions ^2.0 if Symfony 3.0 Support is wanted!**
-**Use Versions ^4.0 if Symfony 4.2 Support is wanted!**
-**Use Versions ^5.0 if Symfony 4.3 or 5.x Support is wanted!**
-**Use Versions ^6.0 if Symfony 6.x Support is wanted!**
+- Use Versions ^2.0 if Symfony 3.0 Support is wanted!
+- Use Versions ^4.0 if Symfony 4.2 Support is wanted!
+- Use Versions ^5.0 if Symfony 4.3 or 5.x Support is wanted!
+- Use Versions ^6.0 if Symfony 6.0 Support is wanted!
 
 ## Documentation
 
