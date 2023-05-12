@@ -14,14 +14,8 @@ class Percentage extends AbstractCondition implements ConditionInterface
 
     const BASIC_LIFETIME = 86400;
 
-    /**
-     * @var Request
-     */
-    private $request;
+    private Request $request;
 
-    /**
-     * @param RequestStack $request
-     */
     public function __construct(RequestStack $request)
     {
         $this->request = $request->getMainRequest();

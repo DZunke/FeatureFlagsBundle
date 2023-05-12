@@ -18,26 +18,17 @@ class PercentageTest extends TestCase
      */
     private $requestStackMock;
 
-    /**
-     * @var string
-     */
-    private $mainRequestMethod = 'getMasterRequest';
-
     public function setUp() : void
     {
+        $requestMock = $this->createMock(Request::class);
         $this->requestStackMock = $this->createMock(RequestStack::class);
+        $this->requestStackMock->method('getMainRequest')->willReturn($requestMock);
 
-        if (method_exists($this->requestStackMock, 'getMainRequest'))
-        {
-            $this->mainRequestMethod = 'getMainRequest';
-        }
     }
 
     public function testItExtendsCorrectly()
     {
-        $requestStackMock = $this->createMock(RequestStack::class);
-
-        $sut = new Percentage($requestStackMock);
+        $sut = new Percentage($this->requestStackMock);
 
         $this->assertInstanceOf(AbstractCondition::class, $sut);
         $this->assertInstanceOf(ConditionInterface::class, $sut);
@@ -63,7 +54,7 @@ class PercentageTest extends TestCase
         $requestStackMock = $this->createMock(RequestStack::class);
         $requestStackMock->method('getMainRequest')->willReturn($requestMock);
 
-        $sut = new Percentage($this->requestStackMock);
+        $sut = new Percentage($requestStackMock);
         $this->assertTrue($sut->validate([
             'percentage' => 798,
         ]));
@@ -80,7 +71,7 @@ class PercentageTest extends TestCase
         $requestStackMock = $this->createMock(RequestStack::class);
         $requestStackMock->method('getMainRequest')->willReturn($requestMock);
 
-        $sut = new Percentage($this->requestStackMock);
+        $sut = new Percentage($requestStackMock);
         self::assertIsBool($sut->validate(['percentage' => 3]));
     }
 
