@@ -14,11 +14,11 @@ class Percentage extends AbstractCondition implements ConditionInterface
 
     const BASIC_LIFETIME = 86400;
 
-    private Request $request;
+    private RequestStack $requestStack;
 
-    public function __construct(RequestStack $request)
+    public function __construct(RequestStack $requestStack)
     {
-        $this->request = $request->getMainRequest();
+        $this->requestStack = $requestStack;
     }
 
     /**
@@ -31,8 +31,8 @@ class Percentage extends AbstractCondition implements ConditionInterface
     {
         $config = $this->formatConfig($config);
 
-        if ($this->request->cookies->has($config['cookie'])) {
-            return (bool)$this->request->cookies->get($config['cookie']);
+        if ($this->requestStack->getMainRequest()->cookies->has($config['cookie'])) {
+            return (bool)$this->requestStack->getMainRequest()->cookies->get($config['cookie']);
         }
 
         $value = (int)($this->generateRandomNumber() < $config['percentage']);
