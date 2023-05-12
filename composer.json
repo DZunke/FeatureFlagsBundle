@@ -13,13 +13,13 @@
     ],
     "require": {
         "php": ">=8.1",
-        "symfony/http-foundation": "~6.0|~6.1",
-        "symfony/http-kernel": "~6.0|~6.1",
-        "symfony/dependency-injection": "~6.0|~6.1",
-        "symfony/config": "~6.0|~6.1",
-        "symfony/console": "~6.0|~6.1",
-        "symfony/twig-bridge": "~6.0|~6.1",
-        "symfony/yaml": "~6.0|~6.1"
+        "symfony/http-foundation": "^6.1",
+        "symfony/http-kernel": "^6.1",
+        "symfony/dependency-injection": "^6.1",
+        "symfony/config": "^6.1",
+        "symfony/console": "^6.1",
+        "symfony/twig-bridge": "^6.1",
+        "symfony/yaml": "^6.1"
     },
     "require-dev": {
         "twig/twig": "~2.0|~3.0",
